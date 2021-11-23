@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  backend:
+    build: ./backend
+    command: mvn spring-boot:run
+    networks:
+      - backend-db
+    ports:
+      - "8080:8080"
+  frontend:
+    build: ./frontend
+    command: npm run dev 
+    ports:
+      - "3000:3000"
+  db:
+    image: mysql:8.0
+    networks:
+      - backend-db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=pelikan
+      - MYSQL_DATABASE=pelikan
+networks:
+  backend-db:
+    driver: bridge
