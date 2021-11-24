@@ -17,7 +17,14 @@ type ButtonProps = {
 };
 
 const Button = ({ label, onClickMethod }: ButtonProps): React.ReactElement => {
-  return <button onClick={onClickMethod && onClickMethod}>{label}</button>;
+  return (
+    <button
+      className="bg-black text-white w-full text-3xl p-2"
+      onClick={onClickMethod && onClickMethod}
+    >
+      {label}
+    </button>
+  );
 };
 
 export default Button;

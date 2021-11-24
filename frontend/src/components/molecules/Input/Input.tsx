@@ -1,31 +1,41 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 import ValidationMessage from "@atoms/ValidationMessage/ValidationMessage";
+import React from "react";
 
 type InputProps = {
-  label: string;
+  placeholder: string;
   type: string;
   register: UseFormRegisterReturn;
   error: any;
 };
 
+/** 
+ * 
+ * TODO: repair autofill!
+ *
+ * @link to help
+ * https://phuctm97.com/blog/write-my-first-tailwindcss-plugin
+ *  
+ **/
 const Input = ({
-  label,
+  placeholder,
   type,
   register,
   error,
 }: InputProps): React.ReactElement => {
   return (
-    <div>
+    <div className="h-20">
       <label>
-        <span>{label}</span>
-        <input 
-        className="" 
-        type={type} 
-        placeholder={label}
-        {...register}
-         />
+        <input
+          className={`w-full input-autofill text-xl bg-white p-2 border-8 focus:outline-none focus-visible:outline-none ${
+            error ? 'border-red-500' : 'border-black' }
+          }`}
+          type={type}
+          placeholder={placeholder}
+          {...register}
+        />
       </label>
-      {error && (<ValidationMessage message={error.message} />)}
+      {error && <ValidationMessage message={error.message} />}
     </div>
   );
 };
