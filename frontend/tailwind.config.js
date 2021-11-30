@@ -41,6 +41,9 @@ module.exports = {
         ".input-placeholder-font-weight::placeholder": {
           fontWeight: "900",
         },
+        ".autofill-bg-white:-webkit-autofill": {
+          "-webkit-box-shadow": "0 0 0 1000px #FFF inset !important",
+        },
       };
       addUtilities(newUtilities);
     }),

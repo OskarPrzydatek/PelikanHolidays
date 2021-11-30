@@ -1,6 +1,6 @@
-import { UseFormRegisterReturn } from "react-hook-form";
-import ValidationMessage from "@atoms/ValidationMessage/ValidationMessage";
 import React from "react";
+import ValidationMessage from "@atoms/ValidationMessage/ValidationMessage";
+import { UseFormRegisterReturn } from "react-hook-form";
 
 type InputProps = {
   placeholder: string;
@@ -9,14 +9,6 @@ type InputProps = {
   error: any;
 };
 
-/**
- *
- * TODO: repair autofill!
- *
- * @link to help
- * https://phuctm97.com/blog/write-my-first-tailwindcss-plugin
- *
- **/
 const Input = ({
   placeholder,
   type,
@@ -27,7 +19,7 @@ const Input = ({
     <div className="h-20">
       <label>
         <input
-          className={`w-full input-placeholder-font-weight text-xl bg-white p-2 border-8 font-black
+          className={`w-full input-placeholder-font-weight autofill-bg-white text-xl bg-white p-2 border-8 font-black
                       focus:outline-none focus-visible:outline-none ${
                         error ? "border-red-500" : "border-black"
                       }`}
