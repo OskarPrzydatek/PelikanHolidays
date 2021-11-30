@@ -19,11 +19,11 @@ const LoginForm = (): React.ReactElement => {
 
   return (
     <form
-      className="w-1/2 p-4 flex flex-col justify-center items-center"
+      className="w-full md:w-1/2 p-4 flex flex-col justify-center items-center"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="w-3/5 space-y-10">
-        <div className="space-y-4">
+      <div className="w-full md:w-4/5 lg:w-3/5 space-y-2 sm:space-y-10">
+        <div className="space-y-2 sm:space-y-4">
           <Input
             placeholder="Login"
             type="text"
