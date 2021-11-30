@@ -9,13 +9,13 @@ type InputProps = {
   error: any;
 };
 
-/** 
- * 
+/**
+ *
  * TODO: repair autofill!
  *
  * @link to help
  * https://phuctm97.com/blog/write-my-first-tailwindcss-plugin
- *  
+ *
  **/
 const Input = ({
   placeholder,
@@ -27,9 +27,10 @@ const Input = ({
     <div className="h-20">
       <label>
         <input
-          className={`w-full input-autofill text-xl bg-white p-2 border-8 focus:outline-none focus-visible:outline-none ${
-            error ? 'border-red-500' : 'border-black' }
-          }`}
+          className={`w-full input-placeholder-font-weight text-xl bg-white p-2 border-8 font-black
+                      focus:outline-none focus-visible:outline-none ${
+                        error ? "border-red-500" : "border-black"
+                      }`}
           type={type}
           placeholder={placeholder}
           {...register}

@@ -25,6 +25,7 @@ module.exports = {
     },
   },
   plugins: [
+    /* Global Style */
     plugin(function ({ addBase }) {
       addBase({
         "*": {
@@ -33,9 +34,13 @@ module.exports = {
         },
       });
     }),
+
+    /* Custom Styles */
     plugin(function ({ addUtilities }) {
       const newUtilities = {
-
+        ".input-placeholder-font-weight::placeholder": {
+          fontWeight: "900",
+        },
       };
       addUtilities(newUtilities);
     }),
