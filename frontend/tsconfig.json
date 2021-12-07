@@ -20,6 +20,7 @@
       "@forms/*": ["src/components/forms/*"],
       "@molecules/*": ["src/components/molecules/*"],
       "@layouts/*": ["src/layouts/*"],
+      "@hooks/*": ["src/hooks/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.config.js"],
