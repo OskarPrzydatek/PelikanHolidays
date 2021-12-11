@@ -19,11 +19,6 @@ public class AppController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("")
-    public String viewHomePage() {
-        return "index";
-    }
-
     @GetMapping("/login")
     public ResponseEntity<User> getUserByEmail(@RequestParam String email, @RequestParam String password) {
         User user = userRepository.findByEmail(email);
