@@ -3,7 +3,7 @@ import Button from "@atoms/Button/Button";
 import Input from "@molecules/Input/Input";
 
 type LoginFormValues = {
-  login: string;
+  email: string;
   password: string;
 };
 
@@ -15,7 +15,17 @@ const LoginForm = (): React.ReactElement => {
   } = useForm<LoginFormValues>();
 
   // Temporary method to debug
-  const onSubmit: SubmitHandler<LoginFormValues> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<LoginFormValues> = async (formData) => {
+    // const URL = `http://localhost:8080/login?email=${formData.email}&password=${formData.password}`;
+    // const URL = `http://localhost:8080/login?email=root@pelikanholidays.com&password=root`;
+
+    // const response = await fetch(URL, { mode: "no-cors" });
+    // const data = await response.json();
+
+    // console.log(response);
+
+    console.log(formData);
+  };
 
   return (
     <form
@@ -25,10 +35,10 @@ const LoginForm = (): React.ReactElement => {
       <div className="w-full md:w-4/5 lg:w-3/5 space-y-2 sm:space-y-10">
         <div className="space-y-2 sm:space-y-4">
           <Input
-            placeholder="Login"
+            placeholder="Email"
             type="text"
-            register={register("login", { required: "Login Wymagany" })}
-            error={errors.login}
+            register={register("email", { required: "Email Wymagany" })}
+            error={errors.email}
           />
           <Input
             placeholder="Haslo"

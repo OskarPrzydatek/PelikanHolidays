@@ -20,6 +20,10 @@ module.exports = {
         "6xl": "4rem",
         "7xl": "5rem",
       },
+      height: {
+        "10vh": "10vh",
+        "90vh": "90vh",
+      },
     },
   },
   variants: {
@@ -46,6 +50,12 @@ module.exports = {
         },
         ".autofill-bg-white:-webkit-autofill": {
           "-webkit-box-shadow": "0 0 0 1000px #FFF inset !important",
+        },
+        ".panel-column-border:first-child": {
+          "border-right": "8px solid #000",
+        },
+        ".panel-column-border:last-child": {
+          "border-left": "8px solid #000",
         },
       };
       addUtilities(newUtilities);
