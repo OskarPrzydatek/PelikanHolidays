@@ -1,5 +1,6 @@
 import React from "react";
 import useOpenPanel from "@hooks/useOpenPanel";
+import PanelButton from "@atoms/PanelButton/PanelButton";
 
 type PanelColumnProps = {
   panelColumnLabel: string;
@@ -20,12 +21,18 @@ const PanelColumn = ({
     <>
       {!openPanel && (
         <div>
-          <button onClick={() => setOpenPanel(true)}>{panelColumnLabel}</button>
+          <PanelButton
+            label={panelColumnLabel}
+            setOpenPanel={() => setOpenPanel(true)}
+          />
         </div>
       )}
       {openPanel && (
         <nav className="w-1/4 h-full text-center panel-column-border">
-          <button onClick={() => setOpenPanel(false)}>{hidePanelLabel}</button>
+          <PanelButton
+            label={hidePanelLabel}
+            setOpenPanel={() => setOpenPanel(false)}
+          />
           {children}
         </nav>
       )}

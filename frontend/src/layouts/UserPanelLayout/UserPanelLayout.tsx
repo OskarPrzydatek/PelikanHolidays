@@ -1,5 +1,5 @@
 import React from "react";
-import PanelColumn from "@atoms/PanelColumn/PanelColumn";
+import PanelColumn from "@molecules/PanelColumn/PanelColumn";
 
 type UserPanelLayoutProps = {
   username: string;
@@ -11,17 +11,16 @@ const UserPanelLayout = ({
   role,
 }: UserPanelLayoutProps): React.ReactElement => {
   return (
-    <>
-      <header className="h-10vh">
-        <div>
+    <div className="p-5 font-black">
+      <header className="h-10vh flex justify-between items-center">
+        <div className="flex space-x-4">
           <h2>Witaj {username}</h2>
-          <p>{role}</p>
+          <p>{role} Panel</p>
         </div>
-
-        <h2>PELIKAN HOLIDAYS</h2>
+        <h2 className="italic text-3xl">PELIKAN HOLIDAYS</h2>
       </header>
 
-      <main className="h-90vh flex">
+      <main className="h-90vh flex text-xl">
         <PanelColumn panelColumnLabel="MENU" hidePanelLabel="<<< SCHOWAJ">
           <p>lorem ipsum</p>
         </PanelColumn>
@@ -36,7 +35,7 @@ const UserPanelLayout = ({
           <p>lorem ipsum</p>
         </PanelColumn>
       </main>
-    </>
+    </div>
   );
 };
 
