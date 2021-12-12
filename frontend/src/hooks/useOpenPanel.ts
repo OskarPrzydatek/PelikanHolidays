@@ -4,11 +4,13 @@ export default function useOpenPanel(mobileWidth: number) {
   const [isMobile, setIsMobile] = React.useState<boolean>(false);
   const [openPanel, setOpenPanel] = React.useState<boolean>(true);
 
-  React.useEffect(() => {
-    // Check width after render
+  const handleisMobile = React.useCallback(() => {
     window.innerWidth < mobileWidth ? setIsMobile(true) : setIsMobile(false);
+  }, []);
 
-    // Set default value by render
+  React.useEffect(() => {
+    window.addEventListener("resize", handleisMobile);
+
     isMobile ? setOpenPanel(false) : setOpenPanel(true);
   }, [isMobile]);
 

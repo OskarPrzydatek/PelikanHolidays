@@ -11,7 +11,7 @@ const UserPanelLayout = ({
   role,
 }: UserPanelLayoutProps): React.ReactElement => {
   return (
-    <div className="p-5 font-black">
+    <div className="px-5 font-black">
       <header className="h-10vh flex justify-between items-center">
         <div className="flex space-x-4">
           <h2>Witaj {username}</h2>

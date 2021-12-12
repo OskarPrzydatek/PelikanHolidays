@@ -13,7 +13,7 @@ const PanelColumn = ({
   hidePanelLabel,
   children,
 }: PanelColumnProps): React.ReactElement => {
-  const mobileWidth = 720;
+  const mobileWidth = 1024;
 
   const [openPanel, setOpenPanel] = useOpenPanel(mobileWidth);
 
