@@ -2,15 +2,15 @@ import React from "react";
 
 type PanelButtonProps = {
   label: string;
-  setOpenPanel: React.MouseEventHandler<HTMLButtonElement>;
+  panelDispatch: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const PanelButton = ({
   label,
-  setOpenPanel,
+  panelDispatch,
 }: PanelButtonProps): React.ReactElement => {
   return (
-    <button className="font-black text-2xl" onClick={setOpenPanel}>
+    <button className="font-black text-2xl" onClick={panelDispatch}>
       {label}
     </button>
   );

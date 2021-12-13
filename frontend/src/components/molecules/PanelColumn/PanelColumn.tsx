@@ -1,37 +1,43 @@
 import React from "react";
-import useOpenPanel from "@hooks/useOpenPanel";
 import PanelButton from "@atoms/PanelButton/PanelButton";
+import { PanelContext } from "@contexts/PanelContext";
 
 type PanelColumnProps = {
   panelColumnLabel: string;
   hidePanelLabel: string;
+  panelPosition: string;
   children: React.ReactNode;
 };
 
 const PanelColumn = ({
   panelColumnLabel,
   hidePanelLabel,
+  panelPosition,
   children,
 }: PanelColumnProps): React.ReactElement => {
-  const mobileWidth = 1024;
+  const { panelState, panelDispatch } = React.useContext(PanelContext);
 
-  const [openPanel, setOpenPanel] = useOpenPanel(mobileWidth);
+  const upperCasePanelPosition = panelPosition.toUpperCase();
 
   return (
     <>
-      {!openPanel && (
+      {!panelState[panelPosition] && (
         <div>
           <PanelButton
             label={panelColumnLabel}
-            setOpenPanel={() => setOpenPanel(true)}
+            panelDispatch={() =>
+              panelDispatch({ type: `OPEN_${upperCasePanelPosition}` })
+            }
           />
         </div>
       )}
-      {openPanel && (
+      {panelState[panelPosition] && (
         <nav className="w-1/4 h-full text-center panel-column-border">
           <PanelButton
             label={hidePanelLabel}
-            setOpenPanel={() => setOpenPanel(false)}
+            panelDispatch={() =>
+              panelDispatch({ type: `CLOSE_${upperCasePanelPosition}` })
+            }
           />
           {children}
         </nav>
