@@ -25,13 +25,45 @@ public class UserRepositoryTests {
     private UserRepository repo;
 
     @Test
-    public void testCreateUser() {
+    public void testCreateAdmin() {
         User user = new User();
-        user.setEmail("root@pelikanholidays.com");
-        user.setPassword("root");
-        user.setFirstName("root");
-        user.setLastName("root");
+        user.setEmail("admin@pelikanholidays.com");
+        user.setPassword("admin");
+        user.setFirstName("admin");
+        user.setLastName("admin");
         user.setUserType(UserType.ADMIN);
+
+        User savedUser = repo.save(user);
+
+        User existUser = entityManager.find(User.class, savedUser.getId());
+
+        assertThat(user.getEmail()).isEqualTo(existUser.getEmail());
+    }
+
+    @Test
+    public void testCreateManager() {
+        User user = new User();
+        user.setEmail("manager@pelikanholidays.com");
+        user.setPassword("manager");
+        user.setFirstName("manager");
+        user.setLastName("manager");
+        user.setUserType(UserType.MANAGER);
+
+        User savedUser = repo.save(user);
+
+        User existUser = entityManager.find(User.class, savedUser.getId());
+
+        assertThat(user.getEmail()).isEqualTo(existUser.getEmail());
+    }
+
+    @Test
+    public void testCreateWorker() {
+        User user = new User();
+        user.setEmail("worker@pelikanholidays.com");
+        user.setPassword("worker");
+        user.setFirstName("worker");
+        user.setLastName("worker");
+        user.setUserType(UserType.WORKER);
 
         User savedUser = repo.save(user);
 
