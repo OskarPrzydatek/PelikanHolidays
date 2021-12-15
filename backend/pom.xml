@@ -56,6 +56,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>webjars-locator-core</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -73,6 +78,11 @@
                 </configuration>
 			</plugin>
 		</plugins>
+		<testResources>
+                <testResource>
+                    <directory>src/main/java/pl/pjatk/backend</directory>
+                </testResource>
+    	</testResources>
 	</build>
 
 </project>
