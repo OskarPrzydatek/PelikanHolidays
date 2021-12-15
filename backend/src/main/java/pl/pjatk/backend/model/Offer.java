@@ -24,16 +24,15 @@ public class Offer {
     @Column(name = "term_to")
     private LocalDateTime termTo;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "hotel_id", referencedColumnName = "id")
     private Hotel hotel;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "transport_id", referencedColumnName = "id")
     private Transport transport;
 
-    @OneToMany
-    @JoinColumn(name = "attraction_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "offer")
     private List<TouristAttraction> attractions;
 
     public Offer() {

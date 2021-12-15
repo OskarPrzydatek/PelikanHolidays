@@ -19,14 +19,20 @@ public class TouristAttraction {
     @Column(name = "description", length = 512)
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "offer_id", referencedColumnName = "id")
+    private Offer offer;
+
     public TouristAttraction() {
     }
 
-    public TouristAttraction(Long id, String name, double price, String description) {
+    public TouristAttraction(Long id, String name, double price,
+                             String description, Offer offer) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
+        this.offer = offer;
     }
 
     public Long getId() {
@@ -59,5 +65,13 @@ public class TouristAttraction {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Offer getOffer() {
+        return offer;
+    }
+
+    public void setOffer(Offer offer) {
+        this.offer = offer;
     }
 }

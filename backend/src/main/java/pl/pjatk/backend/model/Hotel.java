@@ -25,16 +25,21 @@ public class Hotel {
     @Column(name = "description", length = 512)
     private String description;
 
+    @OneToOne(mappedBy = "hotel")
+    private Offer offer;
+
     public Hotel() {
     }
 
-    public Hotel(Long id, String name, String address, float stars, double pricePerDay, String description) {
+    public Hotel(Long id, String name, String address, float stars,
+                 double pricePerDay, String description, Offer offer) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.stars = stars;
         this.pricePerDay = pricePerDay;
         this.description = description;
+        this.offer = offer;
     }
 
     public Long getId() {
@@ -83,5 +88,13 @@ public class Hotel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Offer getOffer() {
+        return offer;
+    }
+
+    public void setOffer(Offer offer) {
+        this.offer = offer;
     }
 }

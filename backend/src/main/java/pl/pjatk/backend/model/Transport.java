@@ -17,13 +17,17 @@ public class Transport {
     @Column(name = "price", nullable = false, scale = 2)
     private double price;
 
+    @OneToOne(mappedBy = "transport")
+    private Offer offer;
+
     public Transport() {
     }
 
-    public Transport(Long id, TransportType transportType, double price) {
+    public Transport(Long id, TransportType transportType, double price, Offer offer) {
         this.id = id;
         this.transportType = transportType;
         this.price = price;
+        this.offer = offer;
     }
 
     public Long getId() {
@@ -48,5 +52,13 @@ public class Transport {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Offer getOffer() {
+        return offer;
+    }
+
+    public void setOffer(Offer offer) {
+        this.offer = offer;
     }
 }
