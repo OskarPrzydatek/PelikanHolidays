@@ -14,10 +14,10 @@ public class Transport {
     @Column(name = "transport_type")
     private TransportType transportType;
 
-    @Column(name = "price", nullable = false, scale = 2)
+    @Column(name = "price")
     private double price;
 
-    @OneToOne(mappedBy = "transport")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Offer offer;
 
     public Transport() {

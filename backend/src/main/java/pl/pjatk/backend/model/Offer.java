@@ -12,10 +12,10 @@ public class Offer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 64)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "location", nullable = false, length = 64)
+    @Column(name = "location")
     private String location;
 
     @Column(name = "term_from")
@@ -24,29 +24,32 @@ public class Offer {
     @Column(name = "term_to")
     private LocalDateTime termTo;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "hotel_id", referencedColumnName = "id")
-    private Hotel hotel;
+    @Column(name = "price")
+    private double price;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "transport_id", referencedColumnName = "id")
-    private Transport transport;
+    @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL)
+    private List<Hotel> hotels;
 
-    @OneToMany(mappedBy = "offer")
+    @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL)
+    private List<Transport> transports;
+
+    @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL)
     private List<TouristAttraction> attractions;
 
     public Offer() {
     }
 
-    public Offer(Long id, String name, String location, LocalDateTime termFrom, LocalDateTime termTo,
-                 Hotel hotel, Transport transport, List<TouristAttraction> attractions) {
+    public Offer(Long id, String name, String location, LocalDateTime termFrom,
+                 LocalDateTime termTo, double price, List<Hotel> hotels,
+                 List<Transport> transports, List<TouristAttraction> attractions) {
         this.id = id;
         this.name = name;
         this.location = location;
         this.termFrom = termFrom;
         this.termTo = termTo;
-        this.hotel = hotel;
-        this.transport = transport;
+        this.price = price;
+        this.hotels = hotels;
+        this.transports = transports;
         this.attractions = attractions;
     }
 
@@ -90,20 +93,28 @@ public class Offer {
         this.termTo = termTo;
     }
 
-    public Hotel getHotel() {
-        return hotel;
+    public double getPrice() {
+        return price;
     }
 
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public Transport getTransport() {
-        return transport;
+    public List<Hotel> getHotels() {
+        return hotels;
     }
 
-    public void setTransport(Transport transport) {
-        this.transport = transport;
+    public void setHotels(List<Hotel> hotels) {
+        this.hotels = hotels;
+    }
+
+    public List<Transport> getTransports() {
+        return transports;
+    }
+
+    public void setTransports(List<Transport> transports) {
+        this.transports = transports;
     }
 
     public List<TouristAttraction> getAttractions() {

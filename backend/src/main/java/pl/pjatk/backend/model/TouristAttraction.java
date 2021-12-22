@@ -10,17 +10,16 @@ public class TouristAttraction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 64)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "price", nullable = false, scale = 2)
+    @Column(name = "price")
     private double price;
 
-    @Column(name = "description", length = 512)
+    @Column(name = "description")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "offer_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Offer offer;
 
     public TouristAttraction() {
