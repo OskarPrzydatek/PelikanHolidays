@@ -10,22 +10,22 @@ public class Hotel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 64)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "address", nullable = false, length = 128)
+    @Column(name = "address")
     private String address;
 
-    @Column(name = "stars", scale = 1)
+    @Column(name = "stars")
     private float stars;
 
-    @Column(name = "price_per_day", nullable = false, scale = 2)
+    @Column(name = "price_per_day")
     private double pricePerDay;
 
-    @Column(name = "description", length = 512)
+    @Column(name = "description")
     private String description;
 
-    @OneToOne(mappedBy = "hotel")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Offer offer;
 
     public Hotel() {
