@@ -15,7 +15,8 @@ const PanelColumn = ({
   panelPosition,
   children,
 }: PanelColumnProps): React.ReactElement => {
-  const { panelState, panelDispatch } = React.useContext(PanelContext);
+  const { isBreakpoint, panelState, panelDispatch } =
+    React.useContext(PanelContext);
 
   const upperCasePanelPosition = panelPosition.toUpperCase();
 
@@ -26,17 +27,23 @@ const PanelColumn = ({
           <PanelButton
             label={panelColumnLabel}
             panelDispatch={() =>
-              panelDispatch({ type: `OPEN_${upperCasePanelPosition}` })
+              panelDispatch({
+                type: `OPEN_${upperCasePanelPosition}`,
+                payload: isBreakpoint,
+              })
             }
           />
         </div>
       )}
       {panelState[panelPosition] && (
-        <nav className="w-1/4 h-full text-center panel-column-border">
+        <nav className="w-full lg:w-1/3 h-full text-center panel-column-border">
           <PanelButton
             label={hidePanelLabel}
             panelDispatch={() =>
-              panelDispatch({ type: `CLOSE_${upperCasePanelPosition}` })
+              panelDispatch({
+                type: `CLOSE_${upperCasePanelPosition}`,
+                payload: isBreakpoint,
+              })
             }
           />
           {children}

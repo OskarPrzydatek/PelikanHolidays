@@ -4,9 +4,9 @@ export type PanelStateType = {
 };
 
 export type PanelActionType =
-  | { type: "OPEN_RIGHT" }
+  | { type: "OPEN_RIGHT"; payload: boolean }
   | { type: "CLOSE_RIGHT" }
-  | { type: "OPEN_LEFT" }
+  | { type: "OPEN_LEFT"; payload: boolean }
   | { type: "CLOSE_LEFT" }
   | { type: "OPEN_ALL" }
   | { type: "CLOSE_ALL" };
@@ -22,20 +22,32 @@ export default function panelReducer(
 ) {
   switch (action.type) {
     case "OPEN_RIGHT":
-      return {
-        ...state,
-        right: true,
-      };
+      if (action.payload) {
+        return {
+          right: true,
+          left: false,
+        };
+      } else
+        return {
+          ...state,
+          right: true,
+        };
     case "CLOSE_RIGHT":
       return {
         ...state,
         right: false,
       };
     case "OPEN_LEFT":
-      return {
-        ...state,
-        left: true,
-      };
+      if (action.payload) {
+        return {
+          right: false,
+          left: true,
+        };
+      } else
+        return {
+          ...state,
+          left: true,
+        };
     case "CLOSE_LEFT":
       return {
         ...state,

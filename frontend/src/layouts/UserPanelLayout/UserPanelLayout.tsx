@@ -15,10 +15,14 @@ const UserPanelLayout = ({
 }: UserPanelLayoutProps): React.ReactElement => {
   const breakpoint = 1024;
 
-  const [panelState, panelDispatch] = usePanel(breakpoint);
+  const [isBreakpoint, panelState, panelDispatch] = usePanel(breakpoint);
+
+  const hideViewInBreakpoint = panelState.right || panelState.left;
+
+  React.useLayoutEffect(() => {console.log(isBreakpoint)}, [])
 
   return (
-    <PanelContext.Provider value={{ panelState, panelDispatch }}>
+    <PanelContext.Provider value={{ isBreakpoint, panelState, panelDispatch }}>
       <div className="px-5 font-black">
         <header className="h-10vh flex justify-between items-center">
           <div className="flex space-x-4">
@@ -37,7 +41,9 @@ const UserPanelLayout = ({
             <p>lorem ipsum</p>
           </PanelColumn>
 
-          <div className="w-full text-center">
+          <div
+            className={`w-full text-center ${hideViewInBreakpoint && "hidden"}`}
+          >
             <p>VIEW</p>
           </div>
 
