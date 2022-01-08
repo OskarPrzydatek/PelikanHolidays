@@ -2,6 +2,9 @@ import React from "react";
 import PanelColumn from "@molecules/PanelColumn/PanelColumn";
 import usePanel from "@hooks/usePanel";
 import { PanelPosition } from "./PanelPosition";
+import Search from "@atoms/Search/Search";
+import LogoutButton from "@atoms/LogoutButton/LogoutButton";
+import UserOptions from "@molecules/UserOptions/UserOptions";
 
 type UserPanelLayoutProps = {
   username: string;
@@ -36,7 +39,9 @@ const UserPanelLayout = ({
           panelState={panelState}
           panelDispatch={panelDispatch}
         >
-          <p>lorem ipsum</p>
+          <UserOptions role={role} />
+          {/* <p>lorem ipsum</p> */}
+          <LogoutButton />
         </PanelColumn>
 
         <div
@@ -55,9 +60,10 @@ const UserPanelLayout = ({
           panelState={panelState}
           panelDispatch={panelDispatch}
         >
+          {/* <p>lorem ipsum</p>
           <p>lorem ipsum</p>
-          <p>lorem ipsum</p>
-          <p>lorem ipsum</p>
+          <p>lorem ipsum</p> */}
+          <Search />
         </PanelColumn>
       </main>
     </div>
