@@ -24,24 +24,12 @@ const PanelColumn = ({
   panelState,
   panelDispatch,
 }: PanelColumnProps): React.ReactElement => {
+  // For dispatch func edit
   const upperCasePanelPosition = panelPosition.toUpperCase();
 
   return (
     <>
-      {!panelState[panelPosition] && (
-        <div>
-          <PanelButton
-            label={panelColumnLabel}
-            panelDispatch={() =>
-              panelDispatch({
-                type: `OPEN_${upperCasePanelPosition}`,
-                payload: isBreakpoint,
-              })
-            }
-          />
-        </div>
-      )}
-      {panelState[panelPosition] && (
+      {panelState[panelPosition] ? (
         <nav className="w-full lg:w-1/3 h-full text-center panel-column-border">
           <PanelButton
             label={hidePanelLabel}
@@ -54,6 +42,18 @@ const PanelColumn = ({
           />
           {children}
         </nav>
+      ) : (
+        <div>
+          <PanelButton
+            label={panelColumnLabel}
+            panelDispatch={() =>
+              panelDispatch({
+                type: `OPEN_${upperCasePanelPosition}`,
+                payload: isBreakpoint,
+              })
+            }
+          />
+        </div>
       )}
     </>
   );

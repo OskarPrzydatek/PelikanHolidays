@@ -12,11 +12,11 @@ export default function usePanel(breakpoint: number) {
     (init) => init
   );
 
-  const handleIsBreakpoint = () => {
+  const handleIsBreakpoint = React.useCallback(() => {
     window.innerWidth <= breakpoint
       ? setIsBreakpoint(true)
       : setIsBreakpoint(false);
-  };
+  }, []);
 
   React.useEffect(() => {
     window.addEventListener("resize", handleIsBreakpoint);
@@ -24,6 +24,8 @@ export default function usePanel(breakpoint: number) {
     isBreakpoint
       ? panelDispatch({ type: "CLOSE_ALL" })
       : panelDispatch({ type: "OPEN_ALL" });
+
+    handleIsBreakpoint();
   }, [isBreakpoint]);
 
   return [isBreakpoint, panelState, panelDispatch] as const;

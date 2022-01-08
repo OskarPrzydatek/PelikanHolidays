@@ -27,7 +27,6 @@ const UserPanelLayout = ({
         </div>
         <h2 className="italic text-xl panel:text-3xl">PELIKAN HOLIDAYS</h2>
       </header>
-
       <main className="h-90vh flex text-xl">
         <PanelColumn
           panelColumnLabel="MENU"
@@ -41,7 +40,7 @@ const UserPanelLayout = ({
         </PanelColumn>
 
         <div
-          className={`w-full text-center ${
+          className={`w-full text-center bg-gray-100 ${
             hideViewInBreakpoint && isBreakpoint && "hidden"
           }`}
         >
