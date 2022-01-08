@@ -12,12 +12,6 @@ export default function usePanel(breakpoint: number) {
     (init) => init
   );
 
-  /* const handleIsBreakpoint = React.useCallback(() => {
-    window.innerWidth <= breakpoint
-      ? setIsBreakpoint(true)
-      : setIsBreakpoint(false);
-  }, []); */
-
   const handleIsBreakpoint = () => {
     window.innerWidth <= breakpoint
       ? setIsBreakpoint(true)

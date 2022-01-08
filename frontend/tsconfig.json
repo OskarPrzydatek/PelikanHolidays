@@ -21,7 +21,6 @@
       "@molecules/*": ["src/components/molecules/*"],
       "@layouts/*": ["src/layouts/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@contexts/*": ["src/contexts/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.config.js"],

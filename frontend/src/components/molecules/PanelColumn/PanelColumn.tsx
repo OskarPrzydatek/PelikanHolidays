@@ -1,12 +1,18 @@
 import React from "react";
 import PanelButton from "@atoms/PanelButton/PanelButton";
-import { PanelContext } from "@contexts/PanelContext";
+import {
+  PanelActionType,
+  PanelStateType,
+} from "@layouts/UserPanelLayout/panelReducer";
 
 type PanelColumnProps = {
   panelColumnLabel: string;
   hidePanelLabel: string;
   panelPosition: string;
   children: React.ReactNode;
+  isBreakpoint: boolean;
+  panelState: PanelStateType | any;
+  panelDispatch: React.Dispatch<PanelActionType> | any;
 };
 
 const PanelColumn = ({
@@ -14,10 +20,10 @@ const PanelColumn = ({
   hidePanelLabel,
   panelPosition,
   children,
+  isBreakpoint,
+  panelState,
+  panelDispatch,
 }: PanelColumnProps): React.ReactElement => {
-  const { isBreakpoint, panelState, panelDispatch } =
-    React.useContext(PanelContext);
-
   const upperCasePanelPosition = panelPosition.toUpperCase();
 
   return (
