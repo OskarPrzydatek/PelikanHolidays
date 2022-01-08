@@ -37,7 +37,13 @@ const LoginForm = (): React.ReactElement => {
           <Input
             placeholder="Email"
             type="text"
-            register={register("email", { required: "Email Wymagany" })}
+            register={register("email", {
+              required: "Email Wymagany",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: "Nieprawidłowy email",
+              },
+            })}
             error={errors.email}
           />
           <Input
