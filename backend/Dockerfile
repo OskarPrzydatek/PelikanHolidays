@@ -4,6 +4,7 @@ COPY src /app/src
 COPY pom.xml /app
 RUN mvn -f /app/pom.xml clean package -DskipTests=true
 
+
 # Java
 FROM adoptopenjdk/openjdk11:alpine-jre
 COPY --from=build /app/target/backend-0.0.1-SNAPSHOT.jar /app/app.jar
