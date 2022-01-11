@@ -1,5 +1,7 @@
 package pl.pjatk.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,25 +21,21 @@ public class Hotel {
     @Column(name = "stars")
     private float stars;
 
-    @Column(name = "price_per_day")
-    private double pricePerDay;
-
     @Column(name = "description")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "hotel", fetch = FetchType.LAZY)
+    @JsonBackReference(value = "offer_hotel")
     private Offer offer;
 
     public Hotel() {
     }
 
-    public Hotel(Long id, String name, String address, float stars,
-                 double pricePerDay, String description, Offer offer) {
+    public Hotel(Long id, String name, String address, float stars, String description, Offer offer) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.stars = stars;
-        this.pricePerDay = pricePerDay;
         this.description = description;
         this.offer = offer;
     }
@@ -72,14 +70,6 @@ public class Hotel {
 
     public void setStars(float stars) {
         this.stars = stars;
-    }
-
-    public double getPricePerDay() {
-        return pricePerDay;
-    }
-
-    public void setPricePerDay(double pricePerDay) {
-        this.pricePerDay = pricePerDay;
     }
 
     public String getDescription() {
