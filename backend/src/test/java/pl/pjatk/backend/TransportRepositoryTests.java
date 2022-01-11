@@ -27,7 +27,6 @@ public class TransportRepositoryTests {
     public void testCreateTransport() {
         Transport transport = new Transport();
         transport.setTransportType(TransportType.PLANE);
-        transport.setPrice(500);
 
         Transport savedTransport = repository.save(transport);
         Transport existTransport = entityManager.find(Transport.class, savedTransport.getId());
