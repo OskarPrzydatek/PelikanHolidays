@@ -39,7 +39,7 @@ public class Offer {
     @JsonManagedReference(value = "offer_transport")
     private Transport transport;
 
-    @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "offer", cascade = CascadeType.MERGE)
     @JsonManagedReference(value = "offer_attraction")
     private List<TouristAttraction> attractions;
 
