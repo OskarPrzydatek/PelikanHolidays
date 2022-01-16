@@ -1,5 +1,7 @@
 package pl.pjatk.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,19 +16,16 @@ public class Transport {
     @Column(name = "transport_type")
     private TransportType transportType;
 
-    @Column(name = "price")
-    private double price;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "transport", fetch = FetchType.LAZY)
+    @JsonBackReference(value = "offer_transport")
     private Offer offer;
 
     public Transport() {
     }
 
-    public Transport(Long id, TransportType transportType, double price, Offer offer) {
+    public Transport(Long id, TransportType transportType, Offer offer) {
         this.id = id;
         this.transportType = transportType;
-        this.price = price;
         this.offer = offer;
     }
 
@@ -44,14 +43,6 @@ public class Transport {
 
     public void setTransportType(TransportType transportType) {
         this.transportType = transportType;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public Offer getOffer() {

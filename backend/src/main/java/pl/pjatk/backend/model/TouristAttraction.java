@@ -1,5 +1,7 @@
 package pl.pjatk.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,6 +22,7 @@ public class TouristAttraction {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "offer_attraction")
     private Offer offer;
 
     public TouristAttraction() {

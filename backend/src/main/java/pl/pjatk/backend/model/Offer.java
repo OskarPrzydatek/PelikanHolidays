@@ -1,5 +1,7 @@
 package pl.pjatk.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,29 +29,34 @@ public class Offer {
     @Column(name = "price")
     private double price;
 
-    @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL)
-    private List<Hotel> hotels;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "hotel_id", referencedColumnName = "id")
+    @JsonManagedReference(value = "offer_hotel")
+    private Hotel hotel;
 
-    @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL)
-    private List<Transport> transports;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "transport_id", referencedColumnName = "id")
+    @JsonManagedReference(value = "offer_transport")
+    private Transport transport;
 
-    @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "offer", cascade = CascadeType.MERGE)
+    @JsonManagedReference(value = "offer_attraction")
     private List<TouristAttraction> attractions;
 
     public Offer() {
     }
 
     public Offer(Long id, String name, String location, LocalDateTime termFrom,
-                 LocalDateTime termTo, double price, List<Hotel> hotels,
-                 List<Transport> transports, List<TouristAttraction> attractions) {
+                 LocalDateTime termTo, double price, Hotel hotel,
+                 Transport transport, List<TouristAttraction> attractions) {
         this.id = id;
         this.name = name;
         this.location = location;
         this.termFrom = termFrom;
         this.termTo = termTo;
         this.price = price;
-        this.hotels = hotels;
-        this.transports = transports;
+        this.hotel = hotel;
+        this.transport = transport;
         this.attractions = attractions;
     }
 
@@ -101,20 +108,20 @@ public class Offer {
         this.price = price;
     }
 
-    public List<Hotel> getHotels() {
-        return hotels;
+    public Hotel getHotel() {
+        return hotel;
     }
 
-    public void setHotels(List<Hotel> hotels) {
-        this.hotels = hotels;
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
-    public List<Transport> getTransports() {
-        return transports;
+    public Transport getTransport() {
+        return transport;
     }
 
-    public void setTransports(List<Transport> transports) {
-        this.transports = transports;
+    public void setTransport(Transport transport) {
+        this.transport = transport;
     }
 
     public List<TouristAttraction> getAttractions() {

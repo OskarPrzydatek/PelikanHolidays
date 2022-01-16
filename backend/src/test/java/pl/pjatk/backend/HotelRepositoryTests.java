@@ -28,7 +28,6 @@ public class HotelRepositoryTests {
         hotel.setName("Super hotel");
         hotel.setAddress("ul.Klonowa 3/33, 33-333, Gdansk");
         hotel.setStars(3.5f);
-        hotel.setPricePerDay(100d);
         hotel.setDescription("nice hotel");
 
         Hotel savedHotel = hotelRepository.save(hotel);
