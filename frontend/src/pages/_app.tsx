@@ -1,26 +1,13 @@
-import type { AppProps } from 'next/app'
-import 'tailwindcss/tailwind.css'
-import { useSession } from "next-auth/react"
-
-type AuthProps = {
-  children: React.ReactNode;
-}
+import type { AppProps } from "next/app";
+import SessionProvider from "@context/SessionProvider/SessionProvider";
+import "tailwindcss/tailwind.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <SessionProvider>
+      <Component {...pageProps} />
+    </SessionProvider>
+  );
 }
 
-function Auth({ children }: AuthProps) {
-  const { data: session, status } = useSession({required: true})
-  const isUser = !!session?.user
-
-  if (isUser) {
-    return children
-  }
-
-  // Session is being fetched, or no user.
-  // If no user, useEffect() will redirect.
-  return <div>Loading...</div>
-}
-
-export default MyApp
+export default MyApp;

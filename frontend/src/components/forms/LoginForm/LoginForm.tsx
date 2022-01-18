@@ -1,6 +1,10 @@
+import Router from "next/router";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Button from "@atoms/Button/Button";
 import Input from "@molecules/Input/Input";
+import React from "react";
+import { SessionContext } from "@context/SessionProvider/SessionProvider";
+import { SessionActions } from "@context/SessionProvider/SessionActions";
 
 type LoginFormValues = {
   email: string;
@@ -14,9 +18,30 @@ const LoginForm = (): React.ReactElement => {
     formState: { errors },
   } = useForm<LoginFormValues>();
 
+  const { sessionDispatch } = React.useContext(SessionContext);
+
   // Temporary method to debug
   const onSubmit: SubmitHandler<LoginFormValues> = async (formData) => {
     console.log(formData);
+
+    // mocks :D
+    const loggedUser = {
+      id: 2,
+      email: formData.email,
+      firstName: "TestName",
+      lastName: "TestSurname",
+      password: formData.password,
+      userType: "Admin",
+    };
+
+    if (sessionDispatch) {
+      sessionDispatch({
+        type: SessionActions.SESSION_START,
+        payload: loggedUser,
+      });
+
+      Router.push(`/user/${loggedUser.id}`);
+    }
   };
 
   return (
