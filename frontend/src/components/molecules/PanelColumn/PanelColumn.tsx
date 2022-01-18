@@ -30,7 +30,11 @@ const PanelColumn = ({
   return (
     <>
       {panelState[panelPosition] ? (
-        <nav className="w-full lg:w-1/3 h-full text-center panel-column-border">
+        <nav
+          className={`w-full flex flex-col lg:w-1/3 h-full text-center panel-column-border ${
+            panelPosition === "right" ? "pl-4" : "pr-4"
+          }`}
+        >
           <PanelButton
             label={hidePanelLabel}
             panelDispatch={() =>

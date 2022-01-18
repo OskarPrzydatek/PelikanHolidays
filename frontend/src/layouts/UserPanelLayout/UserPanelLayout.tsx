@@ -2,6 +2,9 @@ import React from "react";
 import PanelColumn from "@molecules/PanelColumn/PanelColumn";
 import usePanel from "@hooks/usePanel";
 import { PanelPosition } from "./PanelPosition";
+import Search from "@atoms/Search/Search";
+import LogoutButton from "@atoms/LogoutButton/LogoutButton";
+import UserOptions from "@molecules/UserOptions/UserOptions";
 
 type UserPanelLayoutProps = {
   username: string;
@@ -17,6 +20,20 @@ const UserPanelLayout = ({
   const [isBreakpoint, panelState, panelDispatch] = usePanel(breakpoint);
 
   const hideViewInBreakpoint = panelState.right || panelState.left;
+
+  /* ============================================== */
+
+  /* const loadData = async () => {
+    const response = await fetch("http://localhost:8080/hotels/list");
+    const data = response.json();
+    console.log(data);
+  }
+
+  React.useEffect(() => {
+    loadData();
+   }, []) */
+
+   /* ============================================== */
 
   return (
     <div className="px-5 font-black">
@@ -36,7 +53,8 @@ const UserPanelLayout = ({
           panelState={panelState}
           panelDispatch={panelDispatch}
         >
-          <p>lorem ipsum</p>
+          <UserOptions role={role} />
+          <LogoutButton />
         </PanelColumn>
 
         <div
@@ -55,9 +73,7 @@ const UserPanelLayout = ({
           panelState={panelState}
           panelDispatch={panelDispatch}
         >
-          <p>lorem ipsum</p>
-          <p>lorem ipsum</p>
-          <p>lorem ipsum</p>
+          <Search />
         </PanelColumn>
       </main>
     </div>
