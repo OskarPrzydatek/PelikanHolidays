@@ -16,14 +16,6 @@ const LoginForm = (): React.ReactElement => {
 
   // Temporary method to debug
   const onSubmit: SubmitHandler<LoginFormValues> = async (formData) => {
-    // const URL = `http://localhost:8080/login?email=${formData.email}&password=${formData.password}`;
-    // const URL = `http://localhost:8080/login?email=root@pelikanholidays.com&password=root`;
-
-    // const response = await fetch(URL, { mode: "no-cors" });
-    // const data = await response.json();
-
-    // console.log(response);
-
     console.log(formData);
   };
 

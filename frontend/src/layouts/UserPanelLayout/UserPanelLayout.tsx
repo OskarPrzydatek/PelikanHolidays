@@ -21,6 +21,20 @@ const UserPanelLayout = ({
 
   const hideViewInBreakpoint = panelState.right || panelState.left;
 
+  /* ============================================== */
+
+  /* const loadData = async () => {
+    const response = await fetch("http://localhost:8080/hotels/list");
+    const data = response.json();
+    console.log(data);
+  }
+
+  React.useEffect(() => {
+    loadData();
+   }, []) */
+
+   /* ============================================== */
+
   return (
     <div className="px-5 font-black">
       <header className="h-10vh flex justify-between items-center">
@@ -40,7 +54,6 @@ const UserPanelLayout = ({
           panelDispatch={panelDispatch}
         >
           <UserOptions role={role} />
-          {/* <p>lorem ipsum</p> */}
           <LogoutButton />
         </PanelColumn>
 
@@ -60,9 +73,6 @@ const UserPanelLayout = ({
           panelState={panelState}
           panelDispatch={panelDispatch}
         >
-          {/* <p>lorem ipsum</p>
-          <p>lorem ipsum</p>
-          <p>lorem ipsum</p> */}
           <Search />
         </PanelColumn>
       </main>
