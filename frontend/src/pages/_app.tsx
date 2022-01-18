@@ -1,8 +1,13 @@
-import type { AppProps } from 'next/app'
-import 'tailwindcss/tailwind.css'
+import type { AppProps } from "next/app";
+import SessionProvider from "@context/SessionProvider/SessionProvider";
+import "tailwindcss/tailwind.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <SessionProvider>
+      <Component {...pageProps} />
+    </SessionProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

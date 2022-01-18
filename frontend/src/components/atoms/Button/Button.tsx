@@ -19,7 +19,7 @@ type ButtonProps = {
 const Button = ({ label, onClickMethod }: ButtonProps): React.ReactElement => {
   return (
     <button
-      className="bg-black text-white w-full text-3xl p-2"
+      className="bg-black text-white w-full text-3xl p-2 font-black"
       onClick={onClickMethod && onClickMethod}
     >
       {label}
