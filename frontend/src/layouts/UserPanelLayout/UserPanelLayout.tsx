@@ -1,10 +1,11 @@
-import React from "react";
 import PanelColumn from "@molecules/PanelColumn/PanelColumn";
 import usePanel from "@hooks/usePanel";
 import { PanelPosition } from "./PanelPosition";
 import Search from "@atoms/Search/Search";
 import LogoutButton from "@atoms/LogoutButton/LogoutButton";
 import UserOptions from "@molecules/UserOptions/UserOptions";
+import PanelView from "@molecules/PanelView/PanelView";
+import PanelFuncProvider from "@context/PanelFuncProvider/PanelFuncProvider";
 
 type UserPanelLayoutProps = {
   username: string;
@@ -31,36 +32,35 @@ const UserPanelLayout = ({
         <h2 className="italic text-xl panel:text-3xl">PELIKAN HOLIDAYS</h2>
       </header>
       <main className="h-90vh flex text-xl">
-        <PanelColumn
-          panelColumnLabel="MENU"
-          hidePanelLabel="<<< SCHOWAJ"
-          panelPosition={PanelPosition.LEFT}
-          isBreakpoint={isBreakpoint}
-          panelState={panelState}
-          panelDispatch={panelDispatch}
-        >
-          <UserOptions role={role} />
-          <LogoutButton />
-        </PanelColumn>
+        <PanelFuncProvider>
+          <PanelColumn
+            panelColumnLabel="MENU"
+            hidePanelLabel="<<< SCHOWAJ"
+            panelPosition={PanelPosition.LEFT}
+            isBreakpoint={isBreakpoint}
+            panelState={panelState}
+            panelDispatch={panelDispatch}
+          >
+            <UserOptions role={role} />
+            <LogoutButton />
+          </PanelColumn>
 
-        <div
-          className={`w-full text-center bg-gray-100 ${
-            hideViewInBreakpoint && isBreakpoint && "hidden"
-          }`}
-        >
-          <p>VIEW</p>
-        </div>
+          <PanelView
+            hideViewInBreakpoint={hideViewInBreakpoint}
+            isBreakpoint={isBreakpoint}
+          />
 
-        <PanelColumn
-          panelColumnLabel="ZASOBY"
-          hidePanelLabel="SCHOWAJ >>>"
-          panelPosition={PanelPosition.RIGHT}
-          isBreakpoint={isBreakpoint}
-          panelState={panelState}
-          panelDispatch={panelDispatch}
-        >
-          <Search />
-        </PanelColumn>
+          <PanelColumn
+            panelColumnLabel="ZASOBY"
+            hidePanelLabel="SCHOWAJ >>>"
+            panelPosition={PanelPosition.RIGHT}
+            isBreakpoint={isBreakpoint}
+            panelState={panelState}
+            panelDispatch={panelDispatch}
+          >
+            <Search />
+          </PanelColumn>
+        </PanelFuncProvider>
       </main>
     </div>
   );

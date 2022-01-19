@@ -2,7 +2,6 @@ import React, { Suspense } from "react";
 import { NextPage } from "next";
 import UserPanelLayout from "@layouts/UserPanelLayout/UserPanelLayout";
 import SomethingWrong from "@atoms/SomethingWrong/SomethingWrong";
-import Loading from "@atoms/Loading/Loading";
 
 const UserSubpage: NextPage = () => {
   const [session, setSession] = React.useState<any>();
@@ -15,6 +14,9 @@ const UserSubpage: NextPage = () => {
 
   React.useEffect(() => {
     handleSession();
+
+    console.log(session);
+    
   }, []);
 
   return (

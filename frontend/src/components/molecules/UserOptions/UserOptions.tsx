@@ -1,10 +1,11 @@
+import React from "react";
+import { PanelFuncContext } from "@context/PanelFuncProvider/PanelFuncProvider";
 import {
   AdminFunctionalities,
   ManagerFunctionalities,
   UserFunctionality,
   WorkerFunctionalities,
-} from "src/models/UserFunctionalites";
-import React from "react";
+} from "@options/UserFunctionalites";
 
 type UserOptionsProps = {
   role: string;
@@ -13,6 +14,8 @@ type UserOptionsProps = {
 const UserOptions = ({ role }: UserOptionsProps): React.ReactElement => {
   const [userFunctionalites, setUserFunctionalites] =
     React.useState<Array<UserFunctionality>>();
+
+  const { panelFuncDispatch } = React.useContext(PanelFuncContext);
 
   React.useEffect(() => {
     if (role === "Admin") {
@@ -30,11 +33,12 @@ const UserOptions = ({ role }: UserOptionsProps): React.ReactElement => {
 
   return (
     <>
-      {userFunctionalites ? (
+      {userFunctionalites && panelFuncDispatch &&  (
         <ul className="my-10 space-y-4">
-          {userFunctionalites!.map(({ label, endpoint }) => (
+          {userFunctionalites!.map(({ label, functionality }) => (
             <li key={label}>
               <button
+                onClick={() => panelFuncDispatch({ type: functionality})}
                 className={`w-full text-xl bg-white p-2 border-8 border-black font-black 
 						focus:outline-none focus-visible:outline-none `}
               >
@@ -43,8 +47,6 @@ const UserOptions = ({ role }: UserOptionsProps): React.ReactElement => {
             </li>
           ))}
         </ul>
-      ) : (
-        <p>Loading</p>
       )}
     </>
   );

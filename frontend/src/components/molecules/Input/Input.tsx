@@ -4,9 +4,9 @@ import { UseFormRegisterReturn } from "react-hook-form";
 
 type InputProps = {
   placeholder: string;
-  type: string;
   register: UseFormRegisterReturn;
-  error: any;
+  type?: string;
+  error?: any;
 };
 
 const Input = ({
