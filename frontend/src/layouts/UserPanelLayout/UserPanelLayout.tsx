@@ -21,20 +21,6 @@ const UserPanelLayout = ({
 
   const hideViewInBreakpoint = panelState.right || panelState.left;
 
-  /* ============================================== */
-
-  /* const loadData = async () => {
-    const response = await fetch("http://localhost:8080/hotels/list");
-    const data = response.json();
-    console.log(data);
-  }
-
-  React.useEffect(() => {
-    loadData();
-   }, []) */
-
-   /* ============================================== */
-
   return (
     <div className="px-5 font-black">
       <header className="h-10vh flex justify-between items-center">
@@ -66,7 +52,7 @@ const UserPanelLayout = ({
         </div>
 
         <PanelColumn
-          panelColumnLabel="SZUKAJ"
+          panelColumnLabel="ZASOBY"
           hidePanelLabel="SCHOWAJ >>>"
           panelPosition={PanelPosition.RIGHT}
           isBreakpoint={isBreakpoint}

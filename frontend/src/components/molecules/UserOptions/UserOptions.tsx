@@ -3,7 +3,7 @@ import {
   ManagerFunctionalities,
   UserFunctionality,
   WorkerFunctionalities,
-} from "models/UserFunctionalites";
+} from "src/models/UserFunctionalites";
 import React from "react";
 
 type UserOptionsProps = {

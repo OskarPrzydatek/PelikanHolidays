@@ -6,7 +6,7 @@ export default function SomethingWrong() {
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center">
       <h1 className="font-black text-center text-4xl md:text-6xl loading">
-        Coś Poszło nie tak :(
+        Coś poszło nie tak :(
       </h1>
       <div className="w-1/2 md:w-1/4">
         <Button

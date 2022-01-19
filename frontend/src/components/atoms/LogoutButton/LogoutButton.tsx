@@ -1,19 +1,18 @@
 import React from "react";
 import Router from "next/router";
-import { SessionContext } from "@context/SessionProvider/SessionProvider";
-import { SessionActions } from "@context/SessionProvider/SessionActions";
 
 const LogoutButton = () => {
-  const { sessionDispatch } = React.useContext(SessionContext);
+  const handleLogoutBehavior = async () => {
+    await fetch("/api/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user: {},
+        sessionExist: false,
+      }),
+    });
 
-  const handleLogoutBehavior = () => {
-    if (sessionDispatch) {
-      sessionDispatch({
-        type: SessionActions.SESSION_STOP,
-      });
-
-      Router.push("/");
-    }
+    Router.push("/");
   };
 
   return (
