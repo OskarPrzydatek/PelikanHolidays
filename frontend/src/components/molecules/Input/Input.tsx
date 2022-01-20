@@ -7,6 +7,8 @@ type InputProps = {
   register: UseFormRegisterReturn;
   type?: string;
   error?: any;
+  minLengthValidationMessage?: string;
+  maxLengthValidationMessage?: string;
 };
 
 const Input = ({
@@ -14,6 +16,8 @@ const Input = ({
   type,
   register,
   error,
+  minLengthValidationMessage,
+  maxLengthValidationMessage,
 }: InputProps): React.ReactElement => {
   return (
     <div className="h-20">
@@ -29,6 +33,12 @@ const Input = ({
         />
       </label>
       {error && <ValidationMessage message={error.message} />}
+      {error && error.type === "minLength" && minLengthValidationMessage && (
+        <ValidationMessage message={minLengthValidationMessage} />
+      )}
+      {error && error.type === "maxLength" && maxLengthValidationMessage && (
+        <ValidationMessage message={maxLengthValidationMessage} />
+      )}
     </div>
   );
 };
