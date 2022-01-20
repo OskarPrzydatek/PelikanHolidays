@@ -1,4 +1,4 @@
-import { PanelFunctionalites } from "./PanelFuctionalites";
+import { PanelFunctionalites } from "@models/PanelFuctionalites";
 
 export type PanelFuncStateType = {
   chooseOption:

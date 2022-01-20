@@ -4,6 +4,7 @@ import { UseFormRegisterReturn } from "react-hook-form";
 
 type InputProps = {
   placeholder: string;
+  label?: string;
   register: UseFormRegisterReturn;
   type?: string;
   error?: any;
@@ -13,6 +14,7 @@ type InputProps = {
 
 const Input = ({
   placeholder,
+  label,
   type,
   register,
   error,
@@ -20,8 +22,8 @@ const Input = ({
   maxLengthValidationMessage,
 }: InputProps): React.ReactElement => {
   return (
-    <div className="h-20">
-      <label>
+    <div className="h-30">
+      <label>{label}
         <input
           className={`w-full input-placeholder-font-weight autofill-bg-white text-xl bg-white p-2 border-8 font-black
                       focus:outline-none focus-visible:outline-none ${

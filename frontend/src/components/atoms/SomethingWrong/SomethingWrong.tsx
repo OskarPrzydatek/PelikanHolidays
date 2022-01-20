@@ -11,7 +11,7 @@ export default function SomethingWrong() {
       <div className="w-1/2 md:w-1/4">
         <Button
           label="Powrót do strony glównej"
-          onClickMethod={() => Router.push("/")}
+          onClick={() => Router.push("/")}
         />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { NextPage } from "next";
 import UserPanelLayout from "@layouts/UserPanelLayout/UserPanelLayout";
 import SomethingWrong from "@atoms/SomethingWrong/SomethingWrong";

@@ -6,6 +6,8 @@ import {
   UserFunctionality,
   WorkerFunctionalities,
 } from "@options/UserFunctionalites";
+import { Users } from "@models/Users";
+import PanelFuncButton from "@atoms/PanelFuncButton/PanelFuncButton";
 
 type UserOptionsProps = {
   role: string;
@@ -18,32 +20,29 @@ const UserOptions = ({ role }: UserOptionsProps): React.ReactElement => {
   const { panelFuncDispatch } = React.useContext(PanelFuncContext);
 
   React.useEffect(() => {
-    if (role === "Admin") {
+    if (role === Users.ADMIN) {
       setUserFunctionalites(AdminFunctionalities);
     }
 
-    if (role == "Manager") {
+    if (role == Users.MANAGER) {
       setUserFunctionalites(ManagerFunctionalities);
     }
 
-    if (role === "Worker") {
+    if (role === Users.WORKER) {
       setUserFunctionalites(WorkerFunctionalities);
     }
   }, []);
 
   return (
     <>
-      {userFunctionalites && panelFuncDispatch &&  (
+      {userFunctionalites && panelFuncDispatch && (
         <ul className="my-10 space-y-4">
           {userFunctionalites!.map(({ label, functionality }) => (
             <li key={label}>
-              <button
-                onClick={() => panelFuncDispatch({ type: functionality})}
-                className={`w-full text-xl bg-white p-2 border-8 border-black font-black 
-						focus:outline-none focus-visible:outline-none `}
-              >
-                {label}
-              </button>
+              <PanelFuncButton
+                label={label}
+                onClick={() => panelFuncDispatch({ type: functionality })}
+              />
             </li>
           ))}
         </ul>

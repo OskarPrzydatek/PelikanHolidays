@@ -6,6 +6,10 @@ import LogoutButton from "@atoms/LogoutButton/LogoutButton";
 import UserOptions from "@molecules/UserOptions/UserOptions";
 import PanelView from "@molecules/PanelView/PanelView";
 import PanelFuncProvider from "@context/PanelFuncProvider/PanelFuncProvider";
+import ResourcesBar from "@molecules/ResourcesBar/ResourcesBar";
+import { users } from "@mocks/users";
+import { managerResources } from "@mocks/managersResources";
+import { offers } from "@mocks/offers";
 
 type UserPanelLayoutProps = {
   username: string;
@@ -48,6 +52,7 @@ const UserPanelLayout = ({
           <PanelView
             hideViewInBreakpoint={hideViewInBreakpoint}
             isBreakpoint={isBreakpoint}
+            role={role}
           />
 
           <PanelColumn
@@ -59,6 +64,9 @@ const UserPanelLayout = ({
             panelDispatch={panelDispatch}
           >
             <Search />
+            <ResourcesBar
+              resources={users /* managerResources */ /* offers */}
+            />
           </PanelColumn>
         </PanelFuncProvider>
       </main>

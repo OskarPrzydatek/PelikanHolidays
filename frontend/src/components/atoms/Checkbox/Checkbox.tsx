@@ -10,7 +10,7 @@ export default function Checkbox({ label, value, register }: CheckboxProps) {
   return (
     <div>
       <label className="flex justify-start items-start">
-        <div className="bg-white border-6 border-black w-6 h-6 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-none">
+        <div className="bg-white border-4 border-black w-6 h-6 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-none">
           <input
             type="checkbox"
             className="opacity-0 absolute"

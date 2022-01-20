@@ -1,4 +1,4 @@
-import { PanelFunctionalites } from "./PanelFuctionalites";
+import { PanelFunctionalites } from "@models/PanelFuctionalites";
 import { PanelFuncActions, PanelFuncActionsType } from "./PanelFuncActions";
 import { PanelFuncStateType } from "./panelFuncInitState";
 

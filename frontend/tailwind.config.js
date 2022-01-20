@@ -33,12 +33,17 @@ module.exports = {
     },
   },
   plugins: [
+    require("tailwind-scrollbar"),
+
     /* Global Style */
     plugin(function ({ addBase }) {
       addBase({
         "*": {
           boxSizing: "border-box",
           fontFamily: "Arial Narrow, Arial, sans-serif",
+        },
+        body: {
+          overflow: "hidden",
         },
       });
     }),

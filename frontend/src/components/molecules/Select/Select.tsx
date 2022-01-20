@@ -18,7 +18,7 @@ export default function Select({
     <div className="h-20">
       <label>
         <select {...register}>
-          <option disabled>{placeholder}</option>
+          <option disabled selected value="">{placeholder}</option>
           {options.map((option) => (
             <option key={option.name} value={option}>
               {option.name}

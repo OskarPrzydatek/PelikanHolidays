@@ -11,7 +11,6 @@ export default function Radio({ name, label, value, register }: RadioProps) {
   return (
     <div>
       <label>
-        <span>{label}</span>
         <input
           className=""
           type="radio"
@@ -19,6 +18,7 @@ export default function Radio({ name, label, value, register }: RadioProps) {
           {...register}
           name={name}
         />
+        <span>{label}</span>
       </label>
     </div>
   );

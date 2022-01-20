@@ -1,3 +1,4 @@
+import PanelFuncButton from "@atoms/PanelFuncButton/PanelFuncButton";
 import Router from "next/router";
 
 const LogoutButton = () => {
@@ -14,15 +15,7 @@ const LogoutButton = () => {
     Router.push("/");
   };
 
-  return (
-    <button
-      onClick={handleLogoutBehavior}
-      className={`w-full text-xl bg-white p-2 border-8 border-black font-black 
-      focus:outline-none focus-visible:outline-none `}
-    >
-      Wyloguj
-    </button>
-  );
+  return <PanelFuncButton label="WYLOGUJ" onClick={handleLogoutBehavior} />;
 };
 
 export default LogoutButton;

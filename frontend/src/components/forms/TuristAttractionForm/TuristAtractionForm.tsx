@@ -1,7 +1,12 @@
 import Button from "@atoms/Button/Button";
+import PanelFormLayout from "@layouts/PanelFormLayout/PanelFormLayout";
 import Input from "@molecules/Input/Input";
 import TextArea from "@molecules/TextArea/TextArea";
 import { useForm, SubmitHandler } from "react-hook-form";
+
+type TuristAtractionProps = {
+  editedTuristAtraction?: any;
+};
 
 type TuristAtractionValues = {
   name: string;
@@ -9,7 +14,9 @@ type TuristAtractionValues = {
   description: string;
 };
 
-export default function TuristAtractionForm() {
+export default function TuristAtractionForm({
+  editedTuristAtraction,
+}: TuristAtractionProps) {
   const {
     register,
     handleSubmit,
@@ -21,27 +28,52 @@ export default function TuristAtractionForm() {
   };
 
   return (
-    <form className="" onSubmit={handleSubmit(onSubmit)}>
+    <PanelFormLayout
+      label={
+        editedTuristAtraction
+          ? "Edytuj Atrakcję Turystyczną"
+          : "Dodaj Atrakcję Turystyczną"
+      }
+      onSubmit={handleSubmit(onSubmit)}
+      height="70"
+    >
       <Input
-        placeholder="Nazwa Atrakcji"
-        register={register("name", { required: "Nazwa Atrakcji Wymagana" })}
+        placeholder="Podaj Nazwe Atrakcji"
+        label="Nazwa Atrakcji"
+        register={register("name", {
+          required: "Nazwa Atrakcji Wymagana",
+          value: editedTuristAtraction ? editedTuristAtraction.name : "",
+        })}
         error={errors.name}
       />
       <Input
-        placeholder="Cena"
+        label="Cena"
+        placeholder="Podaj Cenę (Liczba)"
         register={register("price", {
           required: "Cena Wymagana",
-          setValueAs: (v) => parseFloat(v),
+          pattern: {
+            value: /^\d+$/,
+            message: "Tylko Format Numeryczny",
+          },
+          value: editedTuristAtraction && editedTuristAtraction.price,
+          valueAsNumber: true,
         })}
         error={errors.price}
       />
       <TextArea
-        placeholder="Opis Atrakcji"
-        register={register("description", { required: true, maxLength: 200 })}
+        label="Opis Atrakcji"
+        placeholder="Dodaj Opis Atrakcji (Max 200 Znaków)"
+        register={register("description", {
+          required: true,
+          value: editedTuristAtraction ? editedTuristAtraction.description : "",
+          maxLength: 200,
+        })}
         error={errors.description}
       />
 
-      <Button label={"ATRAKCJA TURYSTYCZNA"} />
-    </form>
+      <Button
+        label={editedTuristAtraction ? "Edytuj Atrakcję" : "Dodaj Atrakcję"}
+      />
+    </PanelFormLayout>
   );
 }

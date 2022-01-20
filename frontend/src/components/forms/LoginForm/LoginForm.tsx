@@ -25,7 +25,9 @@ const LoginForm = (): React.ReactElement => {
       firstName: "TestName",
       lastName: "TestSurname",
       password: formData.password,
-      userType: "Admin",
+      // userType: "ADMIN",
+      // userType: "MANAGER",
+      userType: "WORKER",
     };
 
     await fetch("/api/session", {

@@ -12,7 +12,7 @@ export default function CheckboxGrup({
   error,
 }: CheckboxGrupProps) {
   return (
-    <div>
+    <div className="space-y-2">
       <h2>{label}</h2>
       <div className="flex flex-col">{children}</div>
       {error && <ValidationMessage message={error.message} />}

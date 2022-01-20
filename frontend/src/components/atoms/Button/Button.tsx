@@ -1,26 +1,13 @@
-/**
- *
- * @param onClickMethod (optional) - give us posibility
- * to implement callack for onClick button method with how many
- * params we want in callack and return what we want.
- *
- * @about onClickMethod && onClickMethod means than if onClickMethod
- * equals true then onClickMethod is called.
- *
- * @happy @hacking
- *
- */
-
 type ButtonProps = {
   label: string;
-  onClickMethod?: (...vals: any) => any;
+  onClick?: (...vals: any) => any;
 };
 
-const Button = ({ label, onClickMethod }: ButtonProps): React.ReactElement => {
+const Button = ({ label, onClick }: ButtonProps): React.ReactElement => {
   return (
     <button
-      className="bg-black text-white w-full text-3xl p-2 font-black"
-      onClick={onClickMethod && onClickMethod}
+      className="bg-black text-white w-full text-3xl p-2 font-black mt-6"
+      onClick={onClick}
     >
       {label}
     </button>

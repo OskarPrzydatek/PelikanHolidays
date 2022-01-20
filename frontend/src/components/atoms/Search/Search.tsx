@@ -4,7 +4,7 @@ const Search = (): React.ReactElement => {
   const [searchValue, setSearchValue] = React.useState("");
 
   return (
-    <label>
+    <label className="mt-10">
       <input
         className={`w-full input-placeholder-font-weight autofill-bg-white text-xl bg-white p-2 border-8 
         border-black font-black focus:outline-none focus-visible:outline-none `}
