@@ -1,11 +1,11 @@
 import Button from "@atoms/Button/Button";
 import Checkbox from "@atoms/Checkbox/Checkbox";
-import Radio from "@atoms/Radio/Radio";
 import CheckboxGrup from "@layouts/CheckboxGrup/CheckboxGrup";
 import PanelFormLayout from "@layouts/PanelFormLayout/PanelFormLayout";
-import RadioGrup from "@layouts/RadioGrup/RadioGrup";
+import { transport } from "@mocks/transport";
 import Input from "@molecules/Input/Input";
 import Select from "@molecules/Select/Select";
+import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type OfferFormProps = {
@@ -21,7 +21,7 @@ type OfferFormValuess = {
   termTo: string;
   price: number;
   hotel: any;
-  transport: string;
+  transport: any;
   attractions: Array<any>;
 };
 
@@ -33,8 +33,13 @@ export default function OfferForm({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<OfferFormValuess>();
+
+  const [choosenAttranctions, setChoosenAttractions] = React.useState<
+    Array<any>
+  >([]);
 
   const onSubmit: SubmitHandler<OfferFormValuess> = async (formData) => {
     console.log(formData);
@@ -47,7 +52,8 @@ export default function OfferForm({
       height="85"
     >
       <Input
-        placeholder="Nazwa Oferty"
+        label="Nazwa Oferty"
+        placeholder="Podaj Nazwe Oferty"
         register={register("name", {
           required: "Nazwa Oferty Wymagana",
           value: editedOffer ? editedOffer.name : "",
@@ -55,7 +61,8 @@ export default function OfferForm({
         error={errors.name}
       />
       <Input
-        placeholder="Nazwa Lokacji"
+        label="Nazwa Lokacji"
+        placeholder="Podaj Nazwę Lokacji"
         register={register("location", {
           required: "Nazwa Lokacji Wymagana",
           value: editedOffer ? editedOffer.location : "",
@@ -63,7 +70,22 @@ export default function OfferForm({
         error={errors.location}
       />
       <Input
-        placeholder="Data Rozpoczęcia"
+        label="Cena"
+        placeholder="Podaj Cenę (Liczba)"
+        register={register("price", {
+          required: "Cena Wymagana",
+          pattern: {
+            value: /^\d+$/,
+            message: "Tylko Format Numeryczny",
+          },
+          value: editedOffer && editedOffer.price,
+          valueAsNumber: true,
+        })}
+        error={errors.location}
+      />
+      <Input
+        label="Data Rozpoczęcia"
+        placeholder="Podaj Datę Rozpoczęcia"
         type="date"
         register={register("termFrom", {
           required: "Data Rozpoczęcia Wymagana",
@@ -72,7 +94,8 @@ export default function OfferForm({
         error={errors.termFrom}
       />
       <Input
-        placeholder="Data Zakończenia"
+        label="Data Zakończenia"
+        placeholder="Podaj Datę Zakończenia"
         type="date"
         register={register("termTo", {
           required: "Data Zakończenia Wymagana",
@@ -81,61 +104,44 @@ export default function OfferForm({
         error={errors.termTo}
       />
       <Select
+        label="Hotel"
         placeholder="Wybierz Hotel"
         options={hotels}
-        register={register("hotel", {
+        register={register("hotel.id", {
           required: "Hotel Wymagany",
-          value: editedOffer ? editedOffer.hotel : null,
+          value: editedOffer && editedOffer.hotel.id,
+          valueAsNumber: true,
         })}
         error={errors.hotel}
       />
-      <RadioGrup label="Transport" error={errors.transport}>
-        <Radio
-          name="transport"
-          label="Autobus"
-          value="BUS"
-          register={register("transport", {
-            required: "Transport Wymagany",
-            value: editedOffer ? editedOffer.transport : "",
-          })}
-        />
-        <Radio
-          name="transport"
-          label="Samolot"
-          value="PLANE"
-          register={register("transport", {
-            required: "Transport Wymagany",
-            value: editedOffer ? editedOffer.transport : "",
-          })}
-        />
-        <Radio
-          name="transport"
-          label="Statek"
-          value="PROM"
-          register={register("transport", {
-            required: "Transport Wymagany",
-            value: editedOffer ? editedOffer.transport : "",
-          })}
-        />
-      </RadioGrup>
+      <Select
+        label="Transport"
+        placeholder="Wybierz Transport"
+        options={transport}
+        register={register("transport.id", {
+          required: "Transport Wymagany",
+          value: editedOffer && editedOffer.transport.id,
+          valueAsNumber: true,
+        })}
+        error={errors.hotel}
+      />
       <CheckboxGrup label="Wybierz Atrakcje" error={errors.attractions}>
         {attractions.map((offerAttraction) => (
           <Checkbox
+            key={offerAttraction.name}
             label={offerAttraction.name}
-            value={offerAttraction}
-            register={register("attractions", {
-              required: "Atrakcje Wymagane",
-              value: editedOffer
-                ? editedOffer.attractions.map(
-                    (offerAttraction: any) => offerAttraction
-                  )
-                : "",
-            })}
+            value={offerAttraction.id}
+            editedOffer={editedOffer}
+            choosenAttranctions={choosenAttranctions}
+            setChoosenAttractions={setChoosenAttractions}
           />
         ))}
       </CheckboxGrup>
 
-      <Button label={editedOffer ? "Edytuj Ofertę" : "Dodaj Ofertę"} />
+      <Button
+        label={editedOffer ? "Edytuj Ofertę" : "Dodaj Ofertę"}
+        onClick={() => setValue("attractions", choosenAttranctions)}
+      />
     </PanelFormLayout>
   );
 }

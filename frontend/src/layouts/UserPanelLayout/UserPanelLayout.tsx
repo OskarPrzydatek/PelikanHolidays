@@ -65,7 +65,7 @@ const UserPanelLayout = ({
           >
             <Search />
             <ResourcesBar
-              resources={users /* managerResources */ /* offers */}
+              resources={/* users */ /* managerResources */ offers}
             />
           </PanelColumn>
         </PanelFuncProvider>

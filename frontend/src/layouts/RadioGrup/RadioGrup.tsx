@@ -8,10 +8,10 @@ type RadioGrupProps = {
 
 export default function RadioGrup({ label, children, error }: RadioGrupProps) {
   return (
-    <div>
+    <section>
       <h2>{label}</h2>
-      <div className="w-full flex justify-between px-4">{children}</div>
+      <div className="w-full flex flex-col px-4">{children}</div>
       {error && <ValidationMessage message={error.message} />}
-    </div>
+    </section>
   );
 }

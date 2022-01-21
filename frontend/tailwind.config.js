@@ -63,6 +63,9 @@ module.exports = {
         ".panel-column-border:last-child": {
           "border-left": "8px solid #000",
         },
+        ".radio > input:checked + #custom-radio > div": {
+          display: "block",
+        },
       };
       addUtilities(newUtilities);
     }),

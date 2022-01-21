@@ -22,12 +22,12 @@ export default function OfferView({ resource, deleteOffer }: OfferViewProps) {
         <li>Do {resource.termTo}</li>
         <li>Cena: {resource.price}</li>
         <li>Hotel: {resource.hotel.name}</li>
-        <li>Transport: {resource.transport}</li>
+        <li>Transport: {resource.transport.transportType}</li>
         <li>
           Atrakcje Turystyczne:
           <ul>
             {resource.attractions.map((attraction: any) => (
-              <li>
+              <li key={attraction.name}>
                 {attraction.name} {attraction.price} PLN
               </li>
             ))}

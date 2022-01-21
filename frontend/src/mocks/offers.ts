@@ -13,7 +13,10 @@ export const offers = [
       stars: 1.5,
       description: "Hotel dla miłośników turystyki ekstremalnej",
     },
-    transport: "BUS",
+    transport: {
+      id: 1,
+      transportType: "BUS",
+    },
     attractions: [
       {
         id: 13,
@@ -37,7 +40,7 @@ export const offers = [
       stars: 5,
       description: "Hotel dla ludzi z klasą",
     },
-    transport: "PLANE",
+    transport: { id: 2, transportType: "PLANE" },
     attractions: [
       {
         id: 13,
