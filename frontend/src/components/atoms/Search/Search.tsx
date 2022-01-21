@@ -18,7 +18,7 @@ const Search = (): React.ReactElement => {
         type="text"
         placeholder="Szukaj Po Nazwie"
         onInput={handleSearchContent}
-      />
+      /> 
 
       <style jsx>{`
         ::-webkit-input-placeholder {
