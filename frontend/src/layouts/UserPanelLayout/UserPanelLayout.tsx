@@ -10,6 +10,7 @@ import ResourcesBar from "@molecules/ResourcesBar/ResourcesBar";
 import { users } from "@mocks/users";
 import { managerResources } from "@mocks/managersResources";
 import { offers } from "@mocks/offers";
+import SearchProvider from "@context/SearchProvider/SearchProvider";
 
 type UserPanelLayoutProps = {
   username: string;
@@ -63,10 +64,12 @@ const UserPanelLayout = ({
             panelState={panelState}
             panelDispatch={panelDispatch}
           >
-            <Search />
-            <ResourcesBar
-              resources={/* users */ /* managerResources */ offers}
-            />
+            <SearchProvider>
+              <Search />
+              <ResourcesBar
+                resources={/* users */ /* managerResources */ offers}
+              />
+            </SearchProvider>
           </PanelColumn>
         </PanelFuncProvider>
       </main>
