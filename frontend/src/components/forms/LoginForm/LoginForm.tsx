@@ -39,7 +39,7 @@ const LoginForm = (): React.ReactElement => {
       }),
     });
 
-    Router.push(`/user/${loggedUser.id}`);
+    Router.push(`/user/${loggedUser.userType.toLowerCase()}/${loggedUser.id}`);
   };
 
   return (
