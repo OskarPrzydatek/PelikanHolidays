@@ -25,7 +25,7 @@ const LoginForm = (): React.ReactElement => {
     const loggedUser = await loginResponse.json();
 
     if (loggedUser.status === 500) {
-      alert("Nieprawidłowy Login lub Hasło!");
+      alert("Użytkownik Nie Istnieje!");
     } else {
       /* Session Start */
       await fetch("/api/session", {

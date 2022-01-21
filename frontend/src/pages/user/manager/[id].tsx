@@ -6,14 +6,31 @@ import SomethingWrong from "@atoms/SomethingWrong/SomethingWrong";
 const UserSubpage: NextPage = () => {
   const [session, setSession] = React.useState<any>();
 
+  const [attractions, setAttractions] = React.useState<Array<any>>();
+  const [hotels, setHotels] = React.useState<Array<any>>();
+
   const handleSession = async () => {
     const response = await fetch("/api/session");
     const data = await response.json();
     setSession(data);
   };
 
+  const handleHotelsList = async () => {
+    const response = await fetch("http://localhost:8080/hotels/list");
+    const data = await response.json();
+    setHotels(data);
+  };
+
+  const handleAttractionsList = async () => {
+    const response = await fetch("http://localhost:8080/attractions/list");
+    const data = await response.json();
+    setAttractions(data);
+  };
+
   React.useEffect(() => {
-    handleSession();    
+    handleSession();
+    handleHotelsList();
+    handleAttractionsList();
   }, []);
 
   return (
@@ -22,6 +39,8 @@ const UserSubpage: NextPage = () => {
         <UserPanelLayout
           username={session.user.firstName}
           role={session.user.userType}
+          //@ts-ignore
+          resources={attractions !== undefined && hotels !== undefined && attractions.concat(hotels)}
         />
       ) : (
         <SomethingWrong />
