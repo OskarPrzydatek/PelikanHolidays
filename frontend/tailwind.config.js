@@ -33,12 +33,17 @@ module.exports = {
     },
   },
   plugins: [
+    require("tailwind-scrollbar"),
+
     /* Global Style */
     plugin(function ({ addBase }) {
       addBase({
         "*": {
           boxSizing: "border-box",
           fontFamily: "Arial Narrow, Arial, sans-serif",
+        },
+        body: {
+          overflow: "hidden",
         },
       });
     }),
@@ -57,6 +62,9 @@ module.exports = {
         },
         ".panel-column-border:last-child": {
           "border-left": "8px solid #000",
+        },
+        ".radio > input:checked + #custom-radio > div": {
+          display: "block",
         },
       };
       addUtilities(newUtilities);

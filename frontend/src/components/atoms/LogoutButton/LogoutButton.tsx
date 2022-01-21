@@ -1,30 +1,21 @@
-import React from "react";
+import PanelFuncButton from "@atoms/PanelFuncButton/PanelFuncButton";
 import Router from "next/router";
-import { SessionContext } from "@context/SessionProvider/SessionProvider";
-import { SessionActions } from "@context/SessionProvider/SessionActions";
 
 const LogoutButton = () => {
-  const { sessionDispatch } = React.useContext(SessionContext);
+  const handleLogoutBehavior = async () => {
+    await fetch("/api/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user: {},
+        sessionExist: false,
+      }),
+    });
 
-  const handleLogoutBehavior = () => {
-    if (sessionDispatch) {
-      sessionDispatch({
-        type: SessionActions.SESSION_STOP,
-      });
-
-      Router.push("/");
-    }
+    Router.push("/");
   };
 
-  return (
-    <button
-      onClick={handleLogoutBehavior}
-      className={`w-full text-xl bg-white p-2 border-8 border-black font-black 
-      focus:outline-none focus-visible:outline-none `}
-    >
-      Wyloguj
-    </button>
-  );
+  return <PanelFuncButton label="WYLOGUJ" onClick={handleLogoutBehavior} />;
 };
 
 export default LogoutButton;

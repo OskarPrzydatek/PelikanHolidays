@@ -1,18 +1,30 @@
 import React from "react";
 import { NextPage } from "next";
 import UserPanelLayout from "@layouts/UserPanelLayout/UserPanelLayout";
-import { SessionContext } from "@context/SessionProvider/SessionProvider";
 import SomethingWrong from "@atoms/SomethingWrong/SomethingWrong";
 
 const UserSubpage: NextPage = () => {
-  const { sessionState } = React.useContext(SessionContext);
+  const [session, setSession] = React.useState<any>();
+
+  const handleSession = async () => {
+    const response = await fetch("/api/session");
+    const data = await response.json();
+    setSession(data);
+  };
+
+  React.useEffect(() => {
+    handleSession();
+
+    console.log(session);
+    
+  }, []);
 
   return (
     <>
-      {sessionState && sessionState.sessionExist ? (
+      {session && session.sessionExist ? (
         <UserPanelLayout
-          username={sessionState.user.email}
-          role={sessionState.user.userType}
+          username={session.user.firstName}
+          role={session.user.userType}
         />
       ) : (
         <SomethingWrong />

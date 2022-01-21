@@ -3,8 +3,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Button from "@atoms/Button/Button";
 import Input from "@molecules/Input/Input";
 import React from "react";
-import { SessionContext } from "@context/SessionProvider/SessionProvider";
-import { SessionActions } from "@context/SessionProvider/SessionActions";
 
 type LoginFormValues = {
   email: string;
@@ -18,12 +16,8 @@ const LoginForm = (): React.ReactElement => {
     formState: { errors },
   } = useForm<LoginFormValues>();
 
-  const { sessionDispatch } = React.useContext(SessionContext);
-
   // Temporary method to debug
   const onSubmit: SubmitHandler<LoginFormValues> = async (formData) => {
-    console.log(formData);
-
     // mocks :D
     const loggedUser = {
       id: 2,
@@ -31,17 +25,21 @@ const LoginForm = (): React.ReactElement => {
       firstName: "TestName",
       lastName: "TestSurname",
       password: formData.password,
-      userType: "Admin",
+      // userType: "ADMIN",
+      // userType: "MANAGER",
+      userType: "WORKER",
     };
 
-    if (sessionDispatch) {
-      sessionDispatch({
-        type: SessionActions.SESSION_START,
-        payload: loggedUser,
-      });
+    await fetch("/api/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user: loggedUser,
+        sessionExist: true,
+      }),
+    });
 
-      Router.push(`/user/${loggedUser.id}`);
-    }
+    Router.push(`/user/${loggedUser.id}`);
   };
 
   return (
