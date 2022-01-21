@@ -24,6 +24,22 @@ export default function HotelForm({ editedHotel }: HotelFormProps) {
 
   const onSubmit: SubmitHandler<HotelFormValues> = async (formData) => {
     console.log(formData);
+
+    if(editedHotel) {
+      await fetch(`http://localhost:8080/hotels/update/${editedHotel.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      })
+    } else {
+      await fetch("http://localhost:8080/hotels/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      })
+    }
+
+    window.location.reload();
   };
 
   return (

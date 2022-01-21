@@ -8,6 +8,11 @@ type HotelViewProps = {
 export default function HotelView({ resource, deleteHotel }: HotelViewProps) {
   const deleteHotelHandler = async () => {
     console.log("Hotel Deleted");
+
+    await fetch(`http://localhost:8080/hotels/delete/${resource.id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
   };
 
   return (

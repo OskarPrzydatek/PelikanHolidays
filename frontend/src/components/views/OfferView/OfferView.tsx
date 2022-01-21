@@ -8,6 +8,11 @@ type OfferViewProps = {
 export default function OfferView({ resource, deleteOffer }: OfferViewProps) {
   const deleteOfferHandler = async () => {
     console.log("Turist Atraction Deleted");
+
+    await fetch(`http://localhost:8080/offers/delete/${resource.id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
   };
 
   return (

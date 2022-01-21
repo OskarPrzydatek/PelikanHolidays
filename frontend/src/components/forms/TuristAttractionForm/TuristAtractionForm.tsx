@@ -25,6 +25,25 @@ export default function TuristAtractionForm({
 
   const onSubmit: SubmitHandler<TuristAtractionValues> = async (formData) => {
     console.log(formData);
+
+    if (editedTuristAtraction) {
+      await fetch(
+        `http://localhost:8080/attractions/update/${editedTuristAtraction.id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
+    } else {
+      await fetch("http://localhost:8080/attractions/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+    }
+
+    window.location.reload();
   };
 
   return (

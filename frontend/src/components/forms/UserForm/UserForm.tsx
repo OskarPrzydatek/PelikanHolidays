@@ -26,6 +26,22 @@ export default function UserForm({ editedUser }: UserFormProps) {
 
   const onSubmit: SubmitHandler<UserFormValues> = async (formData) => {
     console.log(formData);
+
+    if(editedUser) {
+      await fetch(`http://localhost:8080/users/update/${editedUser.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      })
+    } else {
+      await fetch("http://localhost:8080/users/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      })
+    }
+
+    window.location.reload();
   };
 
   return (
