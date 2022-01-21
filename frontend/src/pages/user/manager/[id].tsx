@@ -27,6 +27,12 @@ const UserSubpage: NextPage = () => {
     setAttractions(data);
   };
 
+  const concatResources = () => {
+    if (attractions !== undefined && hotels !== undefined) {
+      return attractions.concat(hotels);
+    }
+  };
+
   React.useEffect(() => {
     handleSession();
     handleHotelsList();
@@ -39,8 +45,9 @@ const UserSubpage: NextPage = () => {
         <UserPanelLayout
           username={session.user.firstName}
           role={session.user.userType}
-          //@ts-ignore
-          resources={attractions !== undefined && hotels !== undefined && attractions.concat(hotels)}
+          resources={
+            concatResources()
+          }
         />
       ) : (
         <SomethingWrong />
