@@ -18,28 +18,29 @@ const LoginForm = (): React.ReactElement => {
 
   // Temporary method to debug
   const onSubmit: SubmitHandler<LoginFormValues> = async (formData) => {
-    // mocks :D
-    const loggedUser = {
-      id: 2,
-      email: formData.email,
-      firstName: "TestName",
-      lastName: "TestSurname",
-      password: formData.password,
-      // userType: "ADMIN",
-      // userType: "MANAGER",
-      userType: "WORKER",
-    };
+    const loginResponse = await fetch(
+      `http://localhost:8080/users/login?email=${formData.email}&password=${formData.password}`
+    );
 
-    await fetch("/api/session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        user: loggedUser,
-        sessionExist: true,
-      }),
-    });
+    const loggedUser = await loginResponse.json();
 
-    Router.push(`/user/${loggedUser.userType.toLowerCase()}/${loggedUser.id}`);
+    if (loggedUser.status === 500) {
+      alert("Nieprawidłowy Login lub Hasło!");
+    } else {
+      /* Session Start */
+      await fetch("/api/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user: loggedUser,
+          sessionExist: true,
+        }),
+      });
+
+      Router.push(
+        `/user/${loggedUser.userType.toLowerCase()}/${loggedUser.id}`
+      );
+    }
   };
 
   return (
