@@ -16,7 +16,6 @@ const LoginForm = (): React.ReactElement => {
     formState: { errors },
   } = useForm<LoginFormValues>();
 
-  // Temporary method to debug
   const onSubmit: SubmitHandler<LoginFormValues> = async (formData) => {
     const loginResponse = await fetch(
       `http://localhost:8080/users/login?email=${formData.email}&password=${formData.password}`

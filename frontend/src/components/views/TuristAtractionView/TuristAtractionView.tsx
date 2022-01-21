@@ -16,6 +16,8 @@ export default function TuristAtractionView({
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
+
+    window.location.reload();
   };
 
   return (

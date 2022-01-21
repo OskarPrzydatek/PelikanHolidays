@@ -3,12 +3,14 @@ import Input from "@molecules/Input/Input";
 import TextArea from "@molecules/TextArea/TextArea";
 import Button from "@atoms/Button/Button";
 import PanelFormLayout from "@layouts/PanelFormLayout/PanelFormLayout";
+import React from "react";
 
 type HotelFormProps = {
   editedHotel?: any;
 };
 
 type HotelFormValues = {
+  id?: number;
   name: string;
   address: string;
   stars: number;
@@ -19,28 +21,33 @@ export default function HotelForm({ editedHotel }: HotelFormProps) {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<HotelFormValues>();
 
   const onSubmit: SubmitHandler<HotelFormValues> = async (formData) => {
-    console.log(formData);
-
-    if(editedHotel) {
+    if (editedHotel) {
       await fetch(`http://localhost:8080/hotels/update/${editedHotel.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-      })
+        body: JSON.stringify(formData),
+      });
     } else {
       await fetch("http://localhost:8080/hotels/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-      })
+        body: JSON.stringify(formData),
+      });
     }
 
     window.location.reload();
   };
+
+  React.useEffect(() => {
+    if(editedHotel) {
+      setValue("id", editedHotel.id);
+    }
+  });
 
   return (
     <PanelFormLayout

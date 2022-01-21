@@ -13,6 +13,8 @@ export default function UserView({ resource, deleteUser }: UserViewProps) {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
+
+    window.location.reload();
   };
 
   return (

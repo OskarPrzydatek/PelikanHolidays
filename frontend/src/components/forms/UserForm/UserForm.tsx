@@ -3,6 +3,7 @@ import Radio from "@atoms/Radio/Radio";
 import PanelFormLayout from "@layouts/PanelFormLayout/PanelFormLayout";
 import RadioGrup from "@layouts/RadioGrup/RadioGrup";
 import Input from "@molecules/Input/Input";
+import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type UserFormProps = {
@@ -10,6 +11,7 @@ type UserFormProps = {
 };
 
 type UserFormValues = {
+  id?: number;
   email: string;
   firstName: string;
   lastName: string;
@@ -21,12 +23,11 @@ export default function UserForm({ editedUser }: UserFormProps) {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<UserFormValues>();
 
   const onSubmit: SubmitHandler<UserFormValues> = async (formData) => {
-    console.log(formData);
-
     if(editedUser) {
       await fetch(`http://localhost:8080/users/update/${editedUser.id}`, {
         method: "PUT",
@@ -43,6 +44,12 @@ export default function UserForm({ editedUser }: UserFormProps) {
 
     window.location.reload();
   };
+
+  React.useEffect(() => {
+    if(editedUser) {
+      setValue("id", editedUser.id);
+    }
+  });
 
   return (
     <PanelFormLayout

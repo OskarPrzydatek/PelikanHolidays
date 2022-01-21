@@ -15,6 +15,7 @@ type OfferFormProps = {
 };
 
 type OfferFormValuess = {
+  id?: number;
   name: string;
   location: string;
   termFrom: string;
@@ -42,24 +43,28 @@ export default function OfferForm({
   >([]);
 
   const onSubmit: SubmitHandler<OfferFormValuess> = async (formData) => {
-    console.log(formData);
-
-    if(editedOffer) {
+    if (editedOffer) {
       await fetch(`http://localhost:8080/offers/update/${editedOffer.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-      })
+        body: JSON.stringify(formData),
+      });
     } else {
       await fetch("http://localhost:8080/offers/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-      })
+        body: JSON.stringify(formData),
+      });
     }
 
     window.location.reload();
   };
+
+  React.useEffect(() => {
+    if (editedOffer) {
+      setValue("id", editedOffer.id);
+    }
+  });
 
   return (
     <PanelFormLayout

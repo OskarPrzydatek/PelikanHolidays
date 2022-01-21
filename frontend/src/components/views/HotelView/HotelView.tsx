@@ -13,6 +13,8 @@ export default function HotelView({ resource, deleteHotel }: HotelViewProps) {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
+
+    window.location.reload();
   };
 
   return (
