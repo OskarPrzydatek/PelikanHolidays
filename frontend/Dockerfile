@@ -25,4 +25,4 @@ COPY . /app
 EXPOSE 3000
 
 # Run yarn dev, as we would via the command line 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "build"]

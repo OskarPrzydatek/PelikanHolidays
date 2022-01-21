@@ -13,10 +13,7 @@ const UserSubpage: NextPage = () => {
   };
 
   React.useEffect(() => {
-    handleSession();
-
-    console.log(session);
-    
+    handleSession();    
   }, []);
 
   return (

@@ -1,10 +1,11 @@
 import React from "react";
-import { NextPage } from "next";
 import UserPanelLayout from "@layouts/UserPanelLayout/UserPanelLayout";
 import SomethingWrong from "@atoms/SomethingWrong/SomethingWrong";
 
-const UserSubpage: NextPage = () => {
+export default function AdminSubpage(/* { userList }: { userList: any } */) {
   const [session, setSession] = React.useState<any>();
+
+  const [resources, setResources] = React.useState();
 
   const handleSession = async () => {
     const response = await fetch("/api/session");
@@ -12,11 +13,15 @@ const UserSubpage: NextPage = () => {
     setSession(data);
   };
 
+  const handleUsersList = async () => {
+    const response = await fetch("http://localhost:8080/users/list");
+    const data = await response.json();
+    setResources(data);
+  };
+
   React.useEffect(() => {
     handleSession();
-
-    console.log(session);
-    
+    handleUsersList();
   }, []);
 
   return (
@@ -25,12 +30,11 @@ const UserSubpage: NextPage = () => {
         <UserPanelLayout
           username={session.user.firstName}
           role={session.user.userType}
+          resources={resources}
         />
       ) : (
         <SomethingWrong />
       )}
     </>
   );
-};
-
-export default UserSubpage;
+}
