@@ -11,17 +11,21 @@ export default function ResourcesBar({ resources }: ResoucesBarProps) {
 
   return (
     <ul className="my-10 space-y-4">
-      {resources
-        .filter((resource) =>
-          resource.name
-            ? resource.name.includes(searchContent)
-            : resource.firstName.includes(searchContent)
-        )
-        .map((resource) => (
-          <li key={resource.id}>
-            <Resource resource={resource} />
-          </li>
-        ))}
+      {resources ? (
+        resources
+          .filter((resource) =>
+            resource.name
+              ? resource.name.includes(searchContent)
+              : resource.firstName.includes(searchContent)
+          )
+          .map((resource) => (
+            <li key={resource.id}>
+              <Resource resource={resource} />
+            </li>
+          ))
+      ) : (
+        <p className="text-center">Brak Zasobów</p>
+      )}
     </ul>
   );
 }

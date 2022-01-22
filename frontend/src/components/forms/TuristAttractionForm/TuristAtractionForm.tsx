@@ -2,6 +2,7 @@ import Button from "@atoms/Button/Button";
 import PanelFormLayout from "@layouts/PanelFormLayout/PanelFormLayout";
 import Input from "@molecules/Input/Input";
 import TextArea from "@molecules/TextArea/TextArea";
+import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type TuristAtractionProps = {
@@ -9,6 +10,7 @@ type TuristAtractionProps = {
 };
 
 type TuristAtractionValues = {
+  id?: number;
   name: string;
   price: number;
   description: string;
@@ -20,12 +22,36 @@ export default function TuristAtractionForm({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<TuristAtractionValues>();
 
   const onSubmit: SubmitHandler<TuristAtractionValues> = async (formData) => {
-    console.log(formData);
+    if (editedTuristAtraction) {
+      await fetch(
+        `http://localhost:8080/attractions/update/${editedTuristAtraction.id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
+    } else {
+      await fetch("http://localhost:8080/attractions/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+    }
+
+    window.location.reload();
   };
+
+  React.useEffect(() => {
+    if(editedTuristAtraction) {
+      setValue("id", editedTuristAtraction.id);
+    }
+  });
 
   return (
     <PanelFormLayout

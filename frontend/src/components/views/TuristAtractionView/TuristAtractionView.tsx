@@ -11,6 +11,13 @@ export default function TuristAtractionView({
 }: TuristAtractionViewProps) {
   const deleteTuristAtractionHandler = async () => {
     console.log("Turist Atraction Deleted");
+
+    await fetch(`http://localhost:8080/attractions/delete/${resource.id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    window.location.reload();
   };
 
   return (

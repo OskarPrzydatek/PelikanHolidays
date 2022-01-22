@@ -15,11 +15,13 @@ import SearchProvider from "@context/SearchProvider/SearchProvider";
 type UserPanelLayoutProps = {
   username: string;
   role: string;
+  resources?: Array<any>;
 };
 
 const UserPanelLayout = ({
   username,
   role,
+  resources
 }: UserPanelLayoutProps): React.ReactElement => {
   const breakpoint = 1024;
 
@@ -67,7 +69,7 @@ const UserPanelLayout = ({
             <SearchProvider>
               <Search />
               <ResourcesBar
-                resources={/* users */ /* managerResources */ offers}
+                resources={/* users */ /* managerResources */ /* offers */ resources!}
               />
             </SearchProvider>
           </PanelColumn>
