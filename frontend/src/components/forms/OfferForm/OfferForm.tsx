@@ -60,6 +60,12 @@ export default function OfferForm({
     window.location.reload();
   };
 
+  const arrayToDate = (array: Array<number>) => {
+    return `${array[0]}-${array[1] < 10 ? `0${array[1]}` : `${array[1]}`}-${
+      array[2] < 10 ? `0${array[2]}` : `${array[2]}`
+    }`;
+  };
+
   React.useEffect(() => {
     if (editedOffer) {
       setValue("id", editedOffer.id);
@@ -110,7 +116,8 @@ export default function OfferForm({
         type="date"
         register={register("termFrom", {
           required: "Data Rozpoczęcia Wymagana",
-          value: editedOffer ? editedOffer.termFrom : "",
+          value: editedOffer ? arrayToDate(editedOffer.termFrom) : "",
+          valueAsDate: true,
         })}
         error={errors.termFrom}
       />
@@ -120,7 +127,8 @@ export default function OfferForm({
         type="date"
         register={register("termTo", {
           required: "Data Zakończenia Wymagana",
-          value: editedOffer ? editedOffer.termTo : "",
+          value: editedOffer ? arrayToDate(editedOffer.termTo) : "",
+          valueAsDate: true,
         })}
         error={errors.termTo}
       />

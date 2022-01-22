@@ -2,8 +2,9 @@ import React from "react";
 import { PanelFuncContext } from "@context/PanelFuncProvider/PanelFuncProvider";
 import OfferForm from "@forms/OfferForm/OfferForm";
 import { PanelFunctionalites } from "@models/PanelFuctionalites";
-import { hotels } from "@mocks/hotels";
-import { atractions } from "@mocks/attractions";
+/* import { hotels } from "@mocks/hotels";
+import { atractions } from "@mocks/attractions"; */
+import { OfferFormResourcesContext } from "@context/OfferFormResourcesContext/OfferFormResourcesContext";
 
 type WorkerFormProps = {
   functionality: string;
@@ -11,11 +12,12 @@ type WorkerFormProps = {
 
 export default function WorkerForm({ functionality }: WorkerFormProps) {
   const { panelFuncState } = React.useContext(PanelFuncContext);
+  const { hotels, attractions } = React.useContext(OfferFormResourcesContext);
 
   return (
     <>
       {functionality === PanelFunctionalites.ADD && (
-        <OfferForm hotels={hotels} attractions={atractions} />
+        <OfferForm hotels={hotels!} attractions={attractions!} />
       )}
       {functionality === PanelFunctionalites.EDIT && (
         <>
@@ -23,8 +25,8 @@ export default function WorkerForm({ functionality }: WorkerFormProps) {
             <p className="text-center">Wybierz Użytkownika Do Edycji</p>
           ) : (
             <OfferForm
-              hotels={hotels}
-              attractions={atractions}
+              hotels={hotels!}
+              attractions={attractions!}
               editedOffer={panelFuncState?.item}
             />
           )}
