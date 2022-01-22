@@ -50,6 +50,7 @@ const PanelColumn = ({
         <div>
           <PanelButton
             label={panelColumnLabel}
+            verticalText={true}
             panelDispatch={() =>
               panelDispatch({
                 type: `OPEN_${upperCasePanelPosition}`,
