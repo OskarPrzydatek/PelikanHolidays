@@ -21,16 +21,25 @@ export default function TuristAtractionView({
   };
 
   return (
-    <section className="text-3xl">
-      <h2 className="text-4xl mb-2">
+    <section className="text-2xl sm:text-3xl overflow-auto scrollbar scrollbar-thumb-black scrollbar-track-white">
+      <h2 className="text-3xl sm:text-4xl mb-2">
         {deleteTuristAtraction
           ? "Usuń Atrakcję Turystyczną"
           : "Podgląd Atrakcji Turystcznej"}
       </h2>
-      <ul className="my-4">
-        <li>Nazwa Atrakcji: {resource.name}</li>
-        <li>Cena: {resource.price} PLN</li>
-        <li>Opis: {resource.description}</li>
+      <ul className="my-4 space-y-4">
+        <li className="flex flex-col">
+          <strong>Nazwa Atrakcji:</strong>
+          <span> {resource.name}</span>
+        </li>
+        <li className="flex flex-col">
+          <strong>Cena:</strong>
+          <span>{resource.price} PLN</span>
+        </li>
+        <li className="flex flex-col">
+          <strong>Opis:</strong>
+          <span>{resource.description}</span>
+        </li>
       </ul>
       {deleteTuristAtraction && (
         <Button
@@ -38,6 +47,12 @@ export default function TuristAtractionView({
           onClick={deleteTuristAtractionHandler}
         />
       )}
+
+      <style jsx>{`
+        section {
+          height: calc(82vh);
+        }
+      `}</style>
     </section>
   );
 }

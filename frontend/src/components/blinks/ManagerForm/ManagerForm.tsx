@@ -26,7 +26,7 @@ export default function ManagerForm({ functionality }: ManagerFormProps) {
             <div className="w-full mb-6 flex justify-between">
               <div>
                 <Button
-                  label="Atrakcja Turystyczna"
+                  label="Atrakcja"
                   onClick={() =>
                     setResourceAddForm(ManagerAddForm.TURIST_ATRACTION)
                   }

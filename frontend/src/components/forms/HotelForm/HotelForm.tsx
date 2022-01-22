@@ -53,7 +53,7 @@ export default function HotelForm({ editedHotel }: HotelFormProps) {
     <PanelFormLayout
       label={editedHotel ? "Edytuj Hotel" : "Dodaj Hotel"}
       onSubmit={handleSubmit(onSubmit)}
-      height="70"
+      height="65"
     >
       <Input
         label="Nazwa Hotelu"

@@ -27,25 +27,42 @@ export default function OfferView({ resource, deleteOffer }: OfferViewProps) {
   }, []);
 
   return (
-    <section className="text-3xl">
-      <h2 className="text-4xl mb-2">
+    <section className="text-2xl sm:text-3xl overflow-auto scrollbar scrollbar-thumb-black scrollbar-track-white">
+      <h2 className="text-3xl sm:text-4xl mb-2">
         {deleteOffer ? "Usuń Ofertę" : "Podgląd Oferty"}
       </h2>
-      <ul className="my-4">
-        <li>Nazwa Oferty: {resource.name}</li>
-        <li>Miejsce: {resource.location}</li>
-        <li>
-          Od {/* resource.termFrom.join("-") */ arrayToDate(resource.termFrom)}
+      <ul className="my-4 space-y-4">
+        <li className="flex flex-col">
+          <strong>Nazwa Oferty:</strong>
+          <span>{resource.name}</span>
         </li>
-        <li>
-          Do {/* resource.termTo.join("-") */ arrayToDate(resource.termTo)}
+        <li className="flex flex-col">
+          <strong>Miejsce:</strong>
+          <span>{resource.location}</span>
         </li>
-        <li>Cena: {resource.price}</li>
-        <li>Hotel: {resource.hotel.name}</li>
-        <li>Transport: {resource.transport.transportType}</li>
-        <li>
+        <li className="flex flex-col">
+          <strong>Od:</strong>
+          <span>{arrayToDate(resource.termFrom)}</span>
+        </li>
+        <li className="flex flex-col">
+          <strong>Do:</strong>
+          <span>{arrayToDate(resource.termTo)}</span>
+        </li>
+        <li className="flex flex-col">
+          <strong>Cena:</strong>
+          <span>{resource.price}</span>
+        </li>
+        <li className="flex flex-col">
+          <strong>Hotel:</strong>
+          <span>{resource.hotel.name}</span>
+        </li>
+        <li className="flex flex-col">
+          <strong>Transport:</strong>
+          <span>{resource.transport.transportType}</span>
+        </li>
+        <li className="flex flex-col mb-4">
           Atrakcje Turystyczne:
-          <ul>
+          <ul className="space-y-2">
             {resource.attractions.map((attraction: any) => (
               <li key={attraction.name}>
                 {attraction.name} {attraction.price} PLN
@@ -57,6 +74,12 @@ export default function OfferView({ resource, deleteOffer }: OfferViewProps) {
       {deleteOffer && (
         <Button label="Usuń Oferte" onClick={deleteOfferHandler} />
       )}
+
+      <style jsx>{`
+        section {
+          height: calc(82vh);
+        }
+      `}</style>
     </section>
   );
 }
